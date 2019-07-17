@@ -1,0 +1,102 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+    <br />
+    <br />
+    <br />
+
+    <fieldset>
+        <legend>预约申请管理</legend>
+        <label>输入单号</label>
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">请输入姓名</label>
+                <div class="layui-input-block">
+                    <select name="name" id="name" lay-filter="name">
+                       
+                    </select>
+                </div>
+            </div>
+        </form>
+        <table class="layui-show" id="demo"></table>
+    </fieldset>
+   <div id="test"></div>
+   
+
+
+
+    <script>
+        layui.use('element', function () {
+            var element = layui.element;
+
+        });
+        layui.use('form', function () {
+            var form = layui.form;
+            $.ajax({
+                url: '/Home/List',
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+
+                    var temp = 0;
+                    $.each(data, function (index, item) {
+                        console.log(item.Name);
+                        $('#name').append('<option value='+index+'>' + item.Name + '</option>');
+                        $('#test').html(item.Name);
+                        //temp += ('<option value="">' + item.Name + '</option>');
+
+
+                    });
+
+                    //$('#name').html(temp);
+                    form.render('select');
+                }
+
+            });
+
+            form.on('select(name)', function (data) {
+                //$.get("/Home/PersonList", { name: data.value }, function (data) {
+                //    $("#test").html(data.Name);
+                //});
+                console.log(data.value);
+                $('#test').html(data.elem[data.value].text);
+                
+
+            });
+
+            
+
+            
+        });
+      
+        layui.use('table', function () {
+            var table = layui.table;
+
+            //展示已知数据
+            table.render({
+                elem: '#demo'
+                ,method:'post'
+                , url: '/Home/PersonList'
+                
+                  
+             
+              , cols: [[ //标题栏
+                { field: 'CustomerID', title: 'ID', width: 120 },
+                { field: 'Name', title: '用户名', width: 120 },
+                { field: 'Phone', title: '手机号', width: 120 },
+                { field: 'Address', title: '地址', width: 120 },
+                { field: 'UIdentity', title: '身份证号', width: 120 }
+               
+              ]]
+             
+                //,skin: 'line' //表格风格
+              , even: true
+                //,page: true //是否显示分页
+                //,limits: [5, 7, 10]
+                //,limit: 5 //每页默认显示的数量
+                
+            });
+        });
+    </script>
+
