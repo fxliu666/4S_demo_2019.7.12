@@ -43,9 +43,12 @@ namespace _4S.WebUI.Controllers
             else
             {
                 List<Customer> temp = new List<Customer>();
-                temp.Add(repository.Customers
-                    .First(x => x.Name == name));
-                tt.data = temp;
+               // temp.Add(repository.Customers
+                //    .First(x => x.Name == name));
+                var obj = from n in repository.Customers
+                         where n.Name == name
+                         select n;
+                tt.data = obj;
             }
 
             //IList<PersonViewModel> persons = new List<PersonViewModel>();

@@ -10,13 +10,17 @@
         <legend>预约申请管理</legend>
         <label>输入单号</label>
         <form class="layui-form" action="">
-            <div class="layui-form-item">
-                <label class="layui-form-label">请输入姓名</label>
-                <div class="layui-input-block">
-                    <select name="name" id="name" lay-filter="name">
-                       
-                    </select>
-                </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">搜索选择框</label>
+                    <div class="layui-input-inline">
+                        
+                            <select name="name" id="name" lay-filter="name" lay-verify="required" lay-search="">
+                               
+                            </select>
+
+                        </div>
+                    </div>
             </div>
         </form>
         <table class="layui-show" id="demo"></table>
@@ -24,79 +28,122 @@
    <div id="test"></div>
    
 
-
-
+    <script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    </div>
+</script>
+    <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
     <script>
         layui.use('element', function () {
             var element = layui.element;
 
         });
-        layui.use('form', function () {
-            var form = layui.form;
-            $.ajax({
-                url: '/Home/List',
-                dataType: 'json',
-                type: 'get',
-                success: function (data) {
+        renderForm();
+        renderTable('');
+        function renderForm(){
+            layui.use('form', function () {
+                var form = layui.form;
+                $.ajax({
+                    url: '/Home/List',
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (data) {
 
-                    var temp = 0;
-                    $.each(data, function (index, item) {
-                        console.log(item.Name);
-                        $('#name').append('<option value='+index+'>' + item.Name + '</option>');
-                        $('#test').html(item.Name);
-                        //temp += ('<option value="">' + item.Name + '</option>');
+                        var temp = 0;
+                        $.each(data, function (index, item) {
+                            console.log(item.Name);
+                            $('#name').append('<option value='+index+'>' + item.Name + '</option>');
+                            $('#test').html(item.Name);
+                            //temp += ('<option value="">' + item.Name + '</option>');
 
 
-                    });
+                        });
 
-                    //$('#name').html(temp);
-                    form.render('select');
-                }
+                        //$('#name').html(temp);
+                        form.render('select');
+                    }
 
-            });
+                });
 
-            form.on('select(name)', function (data) {
-                //$.get("/Home/PersonList", { name: data.value }, function (data) {
-                //    $("#test").html(data.Name);
-                //});
-                console.log(data.value);
-                $('#test').html(data.elem[data.value].text);
+                form.on('select(name)', function (data) {
+                    //$.get("/Home/PersonList", { name: data.value }, function (data) {
+                    //    $("#test").html(data.Name);
+                    //});
+                    renderTable(data.elem[data.value].text);
+                    console.log(data.value);
+                    console.log(data.elem[data.value].text);
+                    $('#test').html(data.elem[data.value].text);
                 
 
-            });
+                });
 
             
 
             
-        });
-      
-        layui.use('table', function () {
-            var table = layui.table;
-
-            //展示已知数据
-            table.render({
-                elem: '#demo'
-                ,method:'post'
-                , url: '/Home/PersonList'
-                
-                  
-             
-              , cols: [[ //标题栏
-                { field: 'CustomerID', title: 'ID', width: 120 },
-                { field: 'Name', title: '用户名', width: 120 },
-                { field: 'Phone', title: '手机号', width: 120 },
-                { field: 'Address', title: '地址', width: 120 },
-                { field: 'UIdentity', title: '身份证号', width: 120 }
-               
-              ]]
-             
-                //,skin: 'line' //表格风格
-              , even: true
-                //,page: true //是否显示分页
-                //,limits: [5, 7, 10]
-                //,limit: 5 //每页默认显示的数量
-                
             });
-        });
+        }
+        function renderTable(m) {
+            layui.use('table', function () {
+                var table = layui.table;
+
+                //展示已知数据
+                table.render({
+                    elem: '#demo'
+                    , method: 'post'
+                    , url: '/Home/PersonList'
+                    ,where:{name:m}
+                    , toolbar: '#toolbarDemo'
+                    , title: '用户数据表'
+                    , totalRow: true
+
+
+
+                  , cols: [[ //标题栏
+                    { field: 'CustomerID', title: 'ID', width: 180 },
+                    { field: 'Name', title: '用户名', width: 180 },
+                    { field: 'Phone', title: '手机号', width: 180 },
+                    { field: 'Address', title: '地址', width: 180 },
+                    { field: 'UIdentity', title: '身份证号', width: 180 },
+                    { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 180 }
+
+                  ]]
+
+                    //,skin: 'line' //表格风格
+                  , even: true
+                    , page: true
+                        , limit: 1
+                    //,page: true //是否显示分页
+                    //,limits: [5, 7, 10]
+                    //,limit: 5 //每页默认显示的数量
+
+                });
+                //工具栏事件
+                table.on('toolbar(test)', function (obj) {
+                    var checkStatus = table.checkStatus(obj.config.id);
+                    switch (obj.event) {
+                        case 'getCheckData':
+                            var data = checkStatus.data;
+                            layer.alert(JSON.stringify(data));
+                            break;
+                        case 'getCheckLength':
+                            var data = checkStatus.data;
+                            layer.msg('选中了：' + data.length + ' 个');
+                            break;
+                        case 'isAll':
+                            layer.msg(checkStatus.isAll ? '全选' : '未全选')
+                            break;
+
+                    };
+                });
+            }
+        )
+        }
     </script>
 
