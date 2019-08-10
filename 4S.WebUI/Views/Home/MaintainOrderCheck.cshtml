@@ -1,0 +1,97 @@
+﻿@model _4S.Domain.Entities.Customer
+@{
+    ViewBag.Title = "MaintainOrderCheck";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+
+
+    <div class="layui-side layui-bg-black" style="margin-top: 60px;">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">预约单审核</a>
+                 
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">预约单查询</a>
+                
+                </li>
+               
+                
+            </ul>
+        </div>
+    </div>
+    <div style="margin-top: 70px;">
+
+    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+        <legend>预约申请审核</legend>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">用户信息</div>
+                        <div class="layui-card-body">
+                            姓名：@Model.Name<br />
+                            电话：13032817472
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">预约单号：123456</div>
+                        <div class="layui-card-body">
+                            创建时间：2019-10-01
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">车辆信息</div>
+                        <div class="layui-card-body">
+                            品牌：大众<br />
+                            型号：辉腾
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">预约维修信息</div>
+                        <div class="layui-card-body">
+                            预约时间：2019-10-10<br />
+                            维修类型：三包期内维修<br />
+                            故障现象：老是熄火<br />
+                            车辆到店方式：自送<br />
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+
+
+        <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+            <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="通过" onclick="pass()" id="pass"/>
+            &nbsp;&nbsp;&nbsp;
+            <input type="button" class="layui-btn layui-btn-radius layui-btn-primaryy" value="打回" onclick="" id="refuse"/>
+        </div>
+       
+            
+           
+       
+
+            
+        </fieldset>
+    </div>
+<script>
+    function pass() {
+        window.location.href = "/Home/MaintainOrderMan";
+    }
+    function refuse() {
+
+    }
+</script>
+  

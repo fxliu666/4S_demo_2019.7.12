@@ -11,5 +11,6 @@ namespace _4S.Domain.Concrete
     public class EFDbContext:DbContext
     {
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<maintainOrder> maintainOrders { get; set; }
     }
 }

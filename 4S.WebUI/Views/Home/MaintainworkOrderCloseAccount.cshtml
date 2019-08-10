@@ -1,68 +1,87 @@
 ﻿
 @{
+    ViewBag.Title = "MaintainworkOrderCreate";
     Layout = "~/Views/Shared/_LayouthomePage.cshtml";
 }
-    <div class="layui-side layui-bg-black" style="margin-top: 60px;">
+
+<div class="layui-side layui-bg-black" style="margin-top: 60px;">
     <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
-            <li class="layui-nav-item layui-nav-itemed">
-                @Html.ActionLink("预约单审核", "MaintainOrderMan", "Home")
-              
+            <li class="layui-nav-item">
+                @Html.ActionLink("创建工单", "MaintainworkOrderCreate", "Home")
+
+            </li>
+
+            <li class="layui-nav-item">
+                @Html.ActionLink("工单查询", "MaintainworkOrderQuery", "Home")
+
             </li>
             <li class="layui-nav-item">
-                @Html.ActionLink("预约单查询", "MaintainOrderPass", "Home")
-               
+                @Html.ActionLink("维修派工", "MaintainworkOrderAssign", "Home")
             </li>
-          
+            <li class="layui-nav-item">
+                @Html.ActionLink("零件领取", "MaintainworkOrderGetParts", "Home")
+            </li>
+            <li class="layui-nav-item">
+                @Html.ActionLink("维修结算", "MaintainworkOrderCloseAccount", "Home")
+            </li>
 
         </ul>
     </div>
 </div>
 <div style="margin-top:70px;">
     <fieldset>
-        
-        <legend>预约申请管理</legend>
+
+        <legend>普通维修结算</legend>
         <div style="padding:20px;background-color:#F2F2F2">
             <div class="layui-row layui-col-space15">
                 <form class="layui-form" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            
-                                <label class="layui-form-label" style="width:130px">搜索预约单号:</label>
-                                <div class="layui-input-inline">
 
-                                    <select name="name" id="name" lay-filter="name" lay-verify="required" lay-search=""></select>
+                            <label class="layui-form-label" style="width:174px">搜索工单号:</label>
+                            <div class="layui-input-inline">
 
-                                </div>
-                            
+                                <select name="name" id="name" lay-filter="name" lay-verify="required" lay-search=""></select>
+
+                            </div>
+
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <table class="layui-show" id="tabledemo" lay-filter="tabledemo"></table>
                     </div>
                 </form>
-                
+
             </div>
         </div>
     </fieldset>
 </div>
-  
-   
 
-    <script type="text/html" id="toolbarDemo">
+
+
+<script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+  
+        <div class="layui-input-inline">
+
+            <select name="modules" lay-verify="required" lay-search="">
+                <option value="">工单状态</option>
+                <option value="1">layer</option>
+                <option value="2">form</option>
+                <option value="3">layim</option>
+                <option value="4">element</option>
+            </select>
+        </div>
     </div>
 </script>
-    <script type="text/html" id="barDemo">
-    
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" >审核</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">详情</a>
-    </script>
-    <script>
+<script type="text/html" id="barDemo">
+
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="del">结算</a>
+</script>
+<script>
         layui.use('element', function () {
             var element = layui.element;
 
@@ -82,7 +101,7 @@
                         $.each(data, function (index, item) {
                             console.log(item.Name);
                             $('#name').append('<option value='+index+'>' + item.Name + '</option>');
-                          
+
                             //temp += ('<option value="">' + item.Name + '</option>');
 
 
@@ -102,13 +121,13 @@
                     console.log(data.value);
                     console.log(data.elem[data.value].text);
                     $('#test').html(data.elem[data.value].text);
-                
+
 
                 });
 
-            
 
-            
+
+
             });
         }
         function renderTable(m) {
@@ -119,7 +138,7 @@
                 table.render({
                     elem: '#tabledemo'
                     , method: 'post'
-                    , url: '/Home/maintainOrder_list'
+                    , url: '/Home/MaintainworkOrder_list2'
                     ,where:{name:m}
                     , toolbar: '#toolbarDemo'
                     , title: '用户数据表'
@@ -127,14 +146,14 @@
 
 
                   , cols: [[ //标题栏
-                    { field: 'maintainOrder_num', title: '预约单号', width: 80 },
-                    { field: 'createTime', title: '提交时间', width: 80 },
-                    { field: 'clientCar_id', title: '用户车辆id', width: 80 },
-                    { field: 'firstOrder_time', title: '预约时间', width: 80 },
-                    { field: 'maintainType', title: '维修类型', width: 80 },
-                    { fixed: 'faultPhenomenon', title: '故障现象', width: 80 },
-                    { fixed: 'wayTostore', title: '到店方式', width: 80 },
-                    { fixed: 'reasonForrefuse', title: '打回理由', width: 80 },
+                    { field: 'orderNum', title: '维修工单号', width: 126 },
+                    { field: 'clientName', title: '客户姓名', width: 90 },
+                    { field: 'carType', title: '车型', width: 80 },
+                    { field: 'createTime', title: '创建时间', width: 140 },
+                    { field: 'faultPh', title: '故障现象', width: 111 },
+                    { field: 'projects', title: '实际维修项目', width: 121 },
+                    { field: 'price', title: '实际价格', width: 95 },
+                    { field: 'state', title: '工单状态', width: 99 },
                     { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 180 }
 
                   ]]
@@ -150,7 +169,7 @@
                 });
                 //工具栏事件
                 table.on('toolbar(tabledemo)', function (obj) {
-                    
+
                     var checkStatus = table.checkStatus(obj.config.id);
                     switch (obj.event) {
                         case 'getCheckData':
@@ -167,8 +186,8 @@
                             break;
                         case 'detail':
                             console.log('hello');
-                         
-                           
+
+
                             break;
                     }
                 });
@@ -200,8 +219,7 @@
                 });
 
             })};
-            
-        
-       
-    </script>
 
+
+
+</script>

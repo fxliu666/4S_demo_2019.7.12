@@ -11,5 +11,6 @@ namespace _4S.Domain.Abstract
     public interface ICustomersRepository
     {
         IEnumerable<Customer> Customers { get; }
+        IEnumerable<maintainOrder> maintainOrders { get; }
     }
 }

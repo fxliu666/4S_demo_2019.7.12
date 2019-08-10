@@ -270,15 +270,21 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\assignOrderlist_message.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\maintainOrderList_message.cs" />
+    <Compile Include="Controllers\maintainworkOrderlist_message.cs" />
     <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\table.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\assignOrder.cs" />
+    <Compile Include="Models\maintainOrderVM.cs" />
+    <Compile Include="Models\maintainWorkorder.cs" />
     <Compile Include="Models\PersonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -301,6 +307,15 @@
     <Content Include="Views\Shared\_LayouthomePage.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\MaintainOrderMan.cshtml" />
+    <Content Include="Views\Home\MaintainOrderCheck.cshtml" />
+    <Content Include="Views\Home\MaintainOrderEdit.cshtml" />
+    <Content Include="Views\Home\MaintainworkOrderCreate.cshtml" />
+    <Content Include="Views\Home\MaintainjobOrderCreate.cshtml" />
+    <Content Include="Views\Home\MaintainOrderPass.cshtml" />
+    <Content Include="Views\Home\MaintainworkOrderQuery.cshtml" />
+    <Content Include="Views\Home\MaintainworkOrderAssign.cshtml" />
+    <Content Include="Views\Home\MaintainworkOrderGetParts.cshtml" />
+    <Content Include="Views\Home\MaintainworkOrderCloseAccount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewBag.Title = "MaintainworkOrderCreate";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+<div class="layui-side layui-bg-black" style="margin-top: 60px;">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item">
+            @Html.ActionLink("创建工单", "MaintainworkOrderCreate", "Home")
+
+            </li>
+           
+            <li class="layui-nav-item">
+                @Html.ActionLink("工单查询", "MaintainworkOrderQuery", "Home")
+               
+            </li>
+            <li class="layui-nav-item">
+                @Html.ActionLink("维修派工", "MaintainworkOrderAssign", "Home")
+            </li>
+            <li class="layui-nav-item">
+                @Html.ActionLink("零件领取", "MaintainworkOrderGetParts", "Home")
+            </li>
+            <li class="layui-nav-item">
+                @Html.ActionLink("维修结算", "MaintainworkOrderCloseAccount", "Home")
+            </li>
+          
+
+        </ul>
+    </div>
+</div>
+<div style="margin-top: 70px;">
+
+    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+        <legend>创建普通维修工单</legend>
+        <form class="layui-form" action="">
+            <div style="padding: 20px; background-color: #F2F2F2;">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">选择创建方式</div>
+                            <div class="layui-card-body">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:100px">创建方式：</label>
+                                        <div class="layui-input-inline">
+                                            <select name="modules" lay-verify="required" lay-search="">
+                                                <option value="">直接选择或搜索选择</option>
+                                                <option value="1">手动创建</option>
+                                                <option value="2">预约单号导入</option>
+                                                <option value="3">手机号导入</option>
+                                                <option value="4">车牌号导入</option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header">用户信息</div>
+                            <div class="layui-card-body">
+                                <div>
+                                    <label style="width:114px">姓名：</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" />
+                                    </div>
+                                    </div>
+
+                                <div style="margin-top:10px">
+                                    <label style="width:114px">电话：</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" />
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header">预约信息</div>
+                            <div class="layui-card-body">
+                                <div>
+                                    <label style="width:114px">预约单号：</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" />
+                                    </div>
+                                </div>
+                                <div style="margin-top:10px">
+                                    <label style="width:114px">创建时间：</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" />
+                                    </div>
+                                </div>
+                                <div style="margin-top:10px">
+                                    <label style="width:114px">预约时间：</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">车辆信息</div>
+                            <div class="layui-card-body">
+                                <div>
+                                    <label style="width:114px">品牌：</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" />
+                                    </div>
+                                </div>
+                                <div style="margin-top:10px">
+                                    <label style="width:114px">车型：</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" />
+                                    </div>
+                                </div>
+                                <div style="margin-top:10px">
+                                    <label style="width:114px">车牌号：</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">维修信息</div>
+                            <div class="layui-card-body">
+                                <div class="layui-form-item">
+                                    故障现象：老是熄火
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="form-inline">
+                                       
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label" style="width:114px">选择维修项目</label>
+                                            <div class="layui-input-inline">
+                                                <select name="modules" lay-verify="required" lay-search="">
+                                                    <option value="">直接选择或搜索选择</option>
+                                                    <option value="1">layer</option>
+                                                    <option value="2">form</option>
+                                                    <option value="3">layim</option>
+                                                    <option value="4">element</option>
+                                                    <option value="5">laytpl</option>
+                                                    <option value="6">upload</option>
+                                                    <option value="7">laydate</option>
+                                                    <option value="8">laypage</option>
+                                                    <option value="9">flow</option>
+                                                    <option value="10">util</option>
+                                                    <option value="11">code</option>
+                                                    <option value="12">tree</option>
+                                                    <option value="13">layedit</option>
+                                                    <option value="14">nav</option>
+                                                    <option value="15">tab</option>
+                                                    <option value="16">table</option>
+                                                    <option value="17">select</option>
+                                                    <option value="18">checkbox</option>
+                                                    <option value="19">switch</option>
+                                                    <option value="20">radio</option>
+                                                </select>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="form-inline">
+                                        <label class="layui-form-label" style="width:114px">预计维修价格</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" />
+                                            </div>
+                               </div>
+                                    </div>
+                                <div class="layui-form-item">
+                                    <div class="form-inline">
+                                        <label class="layui-form-label" style="width:114px">预计提车日期</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss" />
+                                            </div>
+                              
+                                           
+                                  </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+
+        </form>
+
+        <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+            <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="保存" onclick="save()" id="pass" />
+            &nbsp;&nbsp;&nbsp;
+            <input type="button" class="layui-btn layui-btn-radius layui-btn-primaryy" value="提交" onclick="" id="refuse" />
+        </div>
+
+
+
+
+
+
+    </fieldset>
+</div>
+<script>
+    layui.use(['form', 'laydate'], function () {
+        var laydate = layui.laydate;
+        //日期时间选择器
+        laydate.render({
+            elem: '#test5'
+          , type: 'datetime'
+        });
+        var form = layui.form();
+        form.render();
+
+    });
+    function save() {
+        window.location.href = "/Home/MaintainworkOrderCreate";
+    }
+    function refuse() {
+
+    }
+    function create() {
+        window.location.href = "/Home/MaintainjobOrderCreate";
+    }
+</script>
+
+

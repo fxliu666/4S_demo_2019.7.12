@@ -16,5 +16,10 @@ namespace _4S.Domain.Concrete
         {
             get { return context.Customers; }
         }
+
+        public IEnumerable<maintainOrder> maintainOrders
+        {
+            get { return context.maintainOrders; }
+        }
     }
 }
