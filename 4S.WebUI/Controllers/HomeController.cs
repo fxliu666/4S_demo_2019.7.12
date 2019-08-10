@@ -224,5 +224,25 @@ namespace _4S.WebUI.Controllers
             return Json(message, JsonRequestBehavior.AllowGet);
         }
 
+        public ViewResult DepartAdd()
+        {
+            return View();
+        }
+
+
+        public ViewResult StaffAdd()
+        {
+            return View();
+        }
+
+        public ViewResult CarAdd()
+        {
+            return View();
+        }
+
+        public ViewResult PartsAdd()
+        {
+            return View();
+        }
     }
 }

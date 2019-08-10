@@ -44,9 +44,10 @@
                <li class="layui-nav-item">
                     <a href="">店内管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">员工管理</a></dd>
-                        <dd><a href="">车辆管理</a></dd>
-                        <dd><a href="">零件管理</a></dd>
+                        <dd>@Html.ActionLink("部门管理", "DepartAdd", "Home")</dd>
+                        <dd>@Html.ActionLink("员工管理", "StaffAdd", "Home")</a></dd>
+                        <dd>@Html.ActionLink("车辆管理", "CarAdd", "Home")</a></dd>
+                        <dd>@Html.ActionLink("零件管理", "PartsAdd", "Home")</a></dd>
                     </dl>
                 </li>
             <li class="layui-nav-item">

@@ -316,6 +316,8 @@
     <Content Include="Views\Home\MaintainworkOrderAssign.cshtml" />
     <Content Include="Views\Home\MaintainworkOrderGetParts.cshtml" />
     <Content Include="Views\Home\MaintainworkOrderCloseAccount.cshtml" />
+    <Content Include="Views\Home\DepartAdd.cshtml" />
+    <Content Include="Views\Home\StaffAdd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

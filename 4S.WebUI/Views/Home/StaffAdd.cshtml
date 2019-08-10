@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "StaffAdd";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+<div class="layui-side layui-bg-black" style="margin-top: 60px;">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item">
+                @Html.ActionLink("新增员工", "StaffAdd", "Home")
+
+            </li>
+
+            <li class="layui-nav-item">
+                @Html.ActionLink("查询员工", "StaffQuery", "Home")
+
+            </li>
+
+
+        </ul>
+    </div>
+</div>
+<div style="margin-top: 70px;">
+
+    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+        <legend>新增员工</legend>
+        <form class="layui-form" action="">
+            <div style="padding: 20px; background-color: #F2F2F2;">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">填写员工相关信息</div>
+                            <div class="layui-card-body">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:100px">员工编号：</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input" value="0100101" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:100px">员工姓名：</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input" value="王大雷" />
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:100px">登陆密码：</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input" value="123456" />
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:100px">职位：</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input" value="经理" />
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:100px">手机号：</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input" value="13032817472" />
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:100px">部门级别：</label>
+                                        <div class="layui-input-inline">
+                                            <select name="modules" lay-verify="required" lay-search="">
+                                                <option value="">1</option>
+                                                <option value="1">2</option>
+                                                <option value="2">3</option>
+                                                <option value="3">4</option>
+                                                <option value="4">5</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:100px">所属部门：</label>
+                                        <div class="layui-input-inline">
+                                            <select name="modules" lay-verify="required" lay-search="">
+                                                <option value="">维修</option>
+                                                <option value="1">保养</option>
+                                                <option value="2">销售</option>
+                                                <option value="3">财务</option>
+                                                <option value="4">运营</option>
+
+                                            </select>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </form>
+
+        <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+            <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="添加" onclick="save()" id="pass" />
+            &nbsp;&nbsp;&nbsp;
+            <input type="button" class="layui-btn layui-btn-radius layui-btn-primaryy" value="重置" onclick="" id="refuse" />
+        </div>
+
+
+
+
+
+
+    </fieldset>
+</div>
+<script>
+    layui.use(['form', 'laydate'], function () {
+        var laydate = layui.laydate;
+        //日期时间选择器
+        laydate.render({
+            elem: '#test5'
+          , type: 'datetime'
+        });
+        var form = layui.form();
+        form.render();
+
+    });
+    function save() {
+        window.location.href = "/Home/MaintainworkOrderCreate";
+    }
+    function refuse() {
+
+    }
+    function create() {
+        window.location.href = "/Home/MaintainjobOrderCreate";
+    }
+</script>
+
