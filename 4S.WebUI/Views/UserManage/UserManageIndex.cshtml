@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "UserManageIndex";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+<div class="layui-side layui-bg-black" style="margin-top: 60px;">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed">
+                @Html.ActionLink("添加用户", "AddUser", "UserManage")
+
+            </li>
+            <li class="layui-nav-item">
+                @Html.ActionLink("查询用户", "UserManageIndex", "UserManage")
+
+            </li>
+
+
+        </ul>
+    </div>
+</div>
+<div style="margin-top:70px;">
+    <fieldset>
+
+        <legend>用户管理</legend>
+        <div style="padding:20px;background-color:#F2F2F2">
+            <div class="layui-row layui-col-space15">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+
+                            <label class="layui-form-label" style="width:130px">搜索预约单号:</label>
+                            <div class="layui-input-inline">
+
+                                <select name="name" id="name" lay-filter="name" lay-verify="required" lay-search=""></select>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <table class="layui-show" id="tabledemo" lay-filter="tabledemo"></table>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </fieldset>
+</div>
+<script>
+    function loaduser() {
+        $.post("/UserManage/LoadUsers", function (res) {
+            alert(res);
+        });
+    }
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script>
+        layui.use('element', function () {
+            var element = layui.element;
+
+        });
+        renderTable('');
+        function renderTable(m) {
+            layui.use('table', function () {
+                var table = layui.table;
+
+                //展示已知数据
+                table.render({
+                    elem: '#tabledemo'
+                    , method: 'post'
+                    , url: '/UserManage/LoadUsers'
+                    //,where:{name:m}
+                    , toolbar: '#toolbarDemo'
+                    , title: '用户数据表'
+                    , totalRow: true
+
+
+                  , cols: [[ //标题栏
+                    { field: 'CustomerID', title: '用户ID', width: 80, hide: true },
+                    { field: 'Rank', title: '编号', width: 80, type: 'numbers',fixed:'left' },
+                    { field: 'Name', title: '用户姓名', width: 116 },
+                    { field: 'Phone', title: '手机号', width: 127 },
+                    { field: 'Address', title: '住宅地址', width: 138 },
+                    { field: 'UIdentity', title: '身份证号', width: 204 },
+                    { field: 'right', title: '操作', toolbar: '#barDemo', width: 180 }
+
+                  ]]
+                    //,skin: 'line' //表格风格
+                  , even: true
+                    , page: true
+                        , limit: 1
+                    //,page: true //是否显示分页
+                    //,limits: [5, 7, 10]
+                    //,limit: 5 //每页默认显示的数量
+
+                });
+
+                //监听工具条
+                table.on('tool(tabledemo)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                    var data = obj.data; //获得当前行数据
+                    var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+                    var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+                    if (layEvent === 'detail') { //查看
+                        layer.msg(data.Name);
+                        window.location.href = "/Home/MaintainOrderCheck?name=" + data.Name;
+                    } else if (layEvent === 'delete') { //删除
+                        console.log(data);
+                        layer.confirm('确认删除吗', function (index) {
+                            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                            layer.close(index);
+                            //向服务端发送删除指令
+                            deleteUser(data.CustomerID);
+                        });
+                    } else if (layEvent === 'edit') { //编辑
+                        //do something
+                        layer.msg(data.Name);
+                        window.location.href = "/UserManage/EditUser?id=" + data.CustomerID;
+                        //同步更新缓存对应的值
+                        obj.update({
+                            username: '123'
+                          , title: 'xxx'
+                        });
+                    }
+                });
+
+            })
+        };
+        function deleteUser(id) {
+            $.post('/UserManage/deleteuser', { id: id }, function (res) {
+                if (res == 1) {
+                    layer.msg("删除成功");
+                } else if (res == 0) {
+                    layer.msg("服务器繁忙，请重试");
+                }
+            });
+        }
+
+
+
+</script>
+

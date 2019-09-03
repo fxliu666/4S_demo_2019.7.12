@@ -244,5 +244,15 @@ namespace _4S.WebUI.Controllers
         {
             return View();
         }
+
+        public ViewResult AddProject()
+        {
+            return View();
+        }
+
+        public ViewResult AddPart()
+        {
+            return View();
+        }
     }
 }

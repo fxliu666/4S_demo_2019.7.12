@@ -1,0 +1,101 @@
+﻿@model _4S.Domain.Entities.Customer
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+<div class="layui-side layui-bg-black" style="margin-top: 60px;">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed">
+                @Html.ActionLink("添加用户", "AddUser", "UserManage")
+
+            </li>
+            <li class="layui-nav-item">
+                @Html.ActionLink("查询用户", "UserManageIndex", "UserManage")
+
+            </li>
+
+
+        </ul>
+    </div>
+</div>
+<div style="margin-top: 70px;">
+
+    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+        <legend>添加用户</legend>
+        <form class="layui-form" action="UserManageIndex" method="post">
+            <div style="padding: 20px; background-color: #F2F2F2;">
+
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header">用户信息</div>
+                            <div class="layui-card-body">
+                                <div>
+                                    <label class="layui-form-label layui-form-label-col" style="margin-left: 0.8rem;">用户姓名:</label>&nbsp;
+                                    <div class="layui-input-inline" style="width: 24rem;border: 1px solid aliceblue;">
+                                        <input type="text" class="layui-input" name="name" value="@Model.Name">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="layui-form-label layui-form-label-col" style="margin-left: 0.8rem;">手机号:</label>&nbsp;
+                                    <div class="layui-input-inline" style="width: 24rem;border: 1px solid aliceblue;">
+                                        <input type="text" class="layui-input" name="phone" value="@Model.Phone">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="layui-form-label layui-form-label-col" style="margin-left: 0.8rem;">住宅地址:</label>&nbsp;
+                                    <div class="layui-input-inline" style="width: 24rem;border: 1px solid aliceblue;">
+                                        <input type="text" class="layui-input" name="address" value="@Model.Address">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="layui-form-label layui-form-label-col" style="margin-left: 0.8rem;">身份证号:</label>&nbsp;
+                                    <div class="layui-input-inline" style="width: 24rem;border: 1px solid aliceblue;">
+                                        <input type="text" class="layui-input" name="idcard" value="@Model.UIdentity">
+                                    </div>
+                                </div>
+                                <input name="id" value="@Model.CustomerID"/>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+                <input type="submit" class="layui-btn layui-btn-radius layui-btn-normal" value="提交" onclick="return check(this.form)" id="pass" />
+                &nbsp;&nbsp;&nbsp;
+                <input type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="重置" onclick="reset()" id="refuse" />
+            </div>
+
+        </form>
+
+
+
+
+    </fieldset>
+</div>
+<script>
+    //layui.use('layer', function () {
+    //    var layer = layui.layer;
+
+    //    layer.msg('hello');
+    //});
+    function check(form) {
+        if (form.name.value == "" || form.phone.value == '' || form.address.value == '' || form.idcard.value == '') {
+            layer.alert("请输入完整信息");
+            return false;
+        }
+        return true;
+    }
+    function reset() {
+        $('input').attr("value","");
+    }
+</script>
+
+

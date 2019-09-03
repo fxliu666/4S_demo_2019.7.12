@@ -1,0 +1,227 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/layui/layui.js"></script>
+</head>
+<body>
+    <div>
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <form class="layui-form" action="">
+                <div class="layui-row layui-col-space15">
+
+                    <div class="layui-col-md6" id="project">
+                        <div class="layui-card">
+                            <div class="layui-card-header">维修项目</div>
+                            <div class="layui-card-body">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:114px">选择维修项目</label>
+                                        <div class="layui-input-inline">
+                                            <select name="modules" lay-verify="required" lay-search="">
+                                                <option value="">直接选择或搜索选择</option>
+                                                <option value="1">layer</option>
+                                                <option value="2">form</option>
+                                                <option value="3">layim</option>
+                                                <option value="4">element</option>
+                                                <option value="5">laytpl</option>
+                                                <option value="6">upload</option>
+                                                <option value="7">laydate</option>
+                                                <option value="8">laypage</option>
+                                                <option value="9">flow</option>
+                                                <option value="10">util</option>
+                                                <option value="11">code</option>
+                                                <option value="12">tree</option>
+                                                <option value="13">layedit</option>
+                                                <option value="14">nav</option>
+                                                <option value="15">tab</option>
+                                                <option value="16">table</option>
+                                                <option value="17">select</option>
+                                                <option value="18">checkbox</option>
+                                                <option value="19">switch</option>
+                                                <option value="20">radio</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:114px">选择维修小组</label>
+                                        <div class="layui-input-inline">
+                                            <select name="modules" lay-verify="required" lay-search="">
+                                                <option value="">直接选择或搜索选择</option>
+                                                <option value="1">layer</option>
+                                                <option value="2">form</option>
+                                                <option value="3">layim</option>
+                                                <option value="4">element</option>
+                                                <option value="5">laytpl</option>
+                                                <option value="6">upload</option>
+                                                <option value="7">laydate</option>
+                                                <option value="8">laypage</option>
+                                                <option value="9">flow</option>
+                                                <option value="10">util</option>
+                                                <option value="11">code</option>
+                                                <option value="12">tree</option>
+                                                <option value="13">layedit</option>
+                                                <option value="14">nav</option>
+                                                <option value="15">tab</option>
+                                                <option value="16">table</option>
+                                                <option value="17">select</option>
+                                                <option value="18">checkbox</option>
+                                                <option value="19">switch</option>
+                                                <option value="20">radio</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:114px">维修工时</label>
+                                        <div class="layui-input-inline">
+                                            <select name="modules" lay-verify="required" lay-search="">
+                                                <option value="">直接选择或搜索选择</option>
+                                                <option value="1">layer</option>
+                                                <option value="2">form</option>
+                                                <option value="3">layim</option>
+                                                <option value="4">element</option>
+                                                <option value="5">laytpl</option>
+                                                <option value="6">upload</option>
+                                                <option value="7">laydate</option>
+                                                <option value="8">laypage</option>
+                                                <option value="9">flow</option>
+                                                <option value="10">util</option>
+                                                <option value="11">code</option>
+                                                <option value="12">tree</option>
+                                                <option value="13">layedit</option>
+                                                <option value="14">nav</option>
+                                                <option value="15">tab</option>
+                                                <option value="16">table</option>
+                                                <option value="17">select</option>
+                                                <option value="18">checkbox</option>
+                                                <option value="19">switch</option>
+                                                <option value="20">radio</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input type="button" class="layui-btn layui-btn-radius layui-btn-primaryy" value="添加零件" onclick="addPart()" id="btn" />
+                                </div>
+                                <div class="layui-form-item" id="parts">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:114px">选择维修零件</label>
+                                        <div class="layui-input-inline">
+                                            <select name="modules" lay-verify="required" lay-search="">
+                                                <option value="">直接选择或搜索选择</option>
+                                                <option value="1">layer</option>
+                                                <option value="2">form</option>
+                                                <option value="3">layim</option>
+                                                <option value="4">element</option>
+                                                <option value="5">laytpl</option>
+                                                <option value="6">upload</option>
+                                                <option value="7">laydate</option>
+                                                <option value="8">laypage</option>
+                                                <option value="9">flow</option>
+                                                <option value="10">util</option>
+                                                <option value="11">code</option>
+                                                <option value="12">tree</option>
+                                                <option value="13">layedit</option>
+                                                <option value="14">nav</option>
+                                                <option value="15">tab</option>
+                                                <option value="16">table</option>
+                                                <option value="17">select</option>
+                                                <option value="18">checkbox</option>
+                                                <option value="19">switch</option>
+                                                <option value="20">radio</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="layui-form-item" id="part">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:114px">零件数量</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" placeholder="请输入数量" class="layui-input" />
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <script>
+    layui.use('form', function () {
+        var form = layui.form();
+        form.render();
+    });
+    function pass() {
+        window.location.href = "/Home/MaintainworkOrderCreate";
+    }
+    function refuse() {
+
+    }
+
+    function addPart() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                type: 2,
+                title: '添加项目零件',
+                content: '/Home/AddPart',
+                area: ['600px', '400px'],
+                shade: 0,
+                btn: ['确认', '重置'],
+                btnAlign: 'c',
+                skin: 'layui-layer-molv',
+                yes: function (index, layero) {
+                    var body = layer.getChildFrame('body', index);
+                    var num = body.find('#num').val();
+                    layer.msg(num);
+                    console.log(body.html());
+
+                    //do something
+                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+                }
+
+
+            });
+        })
+    }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

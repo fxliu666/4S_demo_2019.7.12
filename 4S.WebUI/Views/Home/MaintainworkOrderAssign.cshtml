@@ -35,59 +35,75 @@
 
     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
         <legend>创建普通维修派工单</legend>
+    </fieldset>
         <div style="padding: 20px; background-color: #F2F2F2;">
-            <div class="layui-row layui-col-space15">
                 <form class="layui-form" action="">
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
+                    <div class="layui-row layui-col-space15">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
 
-                            <label class="layui-form-label" style="width:146px">搜索或选择工单号:</label>
-                            <div class="layui-input-inline">
+                                <label class="layui-form-label" style="width:146px">搜索或选择工单号:</label>
+                                <div class="layui-input-inline">
 
-                                <select name="name" id="name" lay-filter="name" lay-verify="required" lay-search=""></select>
+                                    <select name="name" id="name" lay-filter="name" lay-verify="required" lay-search=""></select>
+
+                                </div>
 
                             </div>
-
                         </div>
-                    </div>
-                    <div class="layui-col-md12">
-                        <div class="layui-card">
-                            <div class="layui-card-header">维修信息</div>
-                            <div class="layui-card-body">
-                                <div class="layui-form-item">
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label" style="width:114px">故障现象：</label>
-                                        <label class="layui-form-label" style="width:114px">发动机一直熄火，且有烧焦的气味</label>
-                                    </div>
-                                <div class="layui-form-item">
-                                    <div class="form-inline">
-
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-header">维修信息</div>
+                                <div class="layui-card-body">
+                                    <div class="layui-form-item">
                                         <div class="layui-inline">
-                                            <label class="layui-form-label" style="width:114px">预计维修项目</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" class="layui-input" value="发动机检修" />
+                                            <label class="layui-form-label" style="width:114px">故障现象：</label>
+                                            <label class="layui-form-label" style="width:114px">发动机一直熄火，且有烧焦的气味</label>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="form-inline">
+
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label" style="width:114px">预计维修项目</label>
+                                                    <div class="layui-input-inline">
+                                                        <input type="text" class="layui-input" value="发动机检修" />
+                                                    </div>
+
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="form-inline">
+                                                <label class="layui-form-label" style="width:114px">预计维修价格</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" class="layui-input" value="800" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="form-inline">
+                                                <label class="layui-form-label" style="width:114px">预计提车日期</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" class="layui-input" id="test5" placeholder="2018-09-10 15:30:00" />
+                                                </div>
+
 
                                             </div>
                                         </div>
+
+
+
                                     </div>
-                                    <div class="layui-form-item">
-                                        <div class="form-inline">
-                                            <label class="layui-form-label" style="width:114px">预计维修价格</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" class="layui-input" value="800"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <div class="form-inline">
-                                            <label class="layui-form-label" style="width:114px">预计提车日期</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" class="layui-input" id="test5" placeholder="2018-09-10 15:30:00" />
-                                            </div>
+                                </div>
+                            </div>
 
-
-                                        </div>
+                        </div>
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-header">创建派工单: </div>
+                                <div class="layui-card-body">
+                                    <div>
+                                        <input type="button" class="layui-btn layui-btn-radius layui-btn-primaryy" value="添加项目" onclick="addProject()" id="refuse" />
                                     </div>
 
 
@@ -96,22 +112,7 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div class="layui-col-md12">
-                        <div class="layui-card">
-                            <div class="layui-card-header">创建派工单: </div>
-                            <div class="layui-card-body">
-                                <div>
-                                    <input type="button" class="layui-btn layui-btn-radius layui-btn-primaryy" value="添加项目" onclick="" id="refuse" />
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                    
-                        <div class="layui-col-md6">
+                        <div class="layui-col-md6" id="project">
                             <div class="layui-card">
                                 <div class="layui-card-header">维修项目</div>
                                 <div class="layui-card-body">
@@ -206,9 +207,9 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <input type="button" class="layui-btn layui-btn-radius layui-btn-primaryy" value="添加零件" onclick="" id="refuse" />
+                                        <input type="button" class="layui-btn layui-btn-radius layui-btn-primaryy" value="添加零件" onclick="addPart()" id="btn" />
                                     </div>
-                                    <div class="layui-form-item">
+                                    <div class="layui-form-item" id="parts">
                                         <div class="layui-inline">
                                             <label class="layui-form-label" style="width:114px">选择维修零件</label>
                                             <div class="layui-input-inline">
@@ -242,13 +243,13 @@
 
 
                                     </div>
-                                    <div class="layui-form-item">
+                                    <div class="layui-form-item" id="part">
                                         <div class="layui-inline">
                                             <label class="layui-form-label" style="width:114px">零件数量</label>
                                             <div class="layui-input-inline">
                                                 <input type="text" placeholder="请输入数量" class="layui-input" />
                                             </div>
-                                     
+
 
                                         </div>
 
@@ -260,9 +261,9 @@
                             </div>
                         </div>
 
-
+                    </div>
 </form>
-            </div>
+            
         </div>
 
 
@@ -279,18 +280,52 @@
 
 
 
-    </fieldset>
+    
 </div>
 <script>
     layui.use('form', function () {
         var form = layui.form();
         form.render();
-    })
+    });
     function pass() {
         window.location.href = "/Home/MaintainworkOrderCreate";
     }
     function refuse() {
 
+    }
+
+    function addProject() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                type: 2,
+                title:'添加维修项目',
+                content: '/Home/AddProject',
+                area: ['700px', '500px'],
+                shade: 0,
+                btn: ['确认', '重置'],
+                btnAlign: 'c',
+                skin: 'layui-layer-molv'
+
+            });
+        })
+    }
+    function addPart() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                type: 2,
+                title: '添加项目零件',
+                content: '/AddPage/AddProject',
+                area: ['300px', '200px'],
+                shade: 0,
+                btn: ['确认', '重置'],
+                btnAlign: 'c',
+                skin: 'layui-layer-molv'
+
+
+            });
+        })
     }
 </script>
 
