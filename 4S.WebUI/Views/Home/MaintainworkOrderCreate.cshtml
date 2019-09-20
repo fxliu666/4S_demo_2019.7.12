@@ -9,22 +9,22 @@
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
             <li class="layui-nav-item">
-            @Html.ActionLink("创建工单", "MaintainworkOrderCreate", "Home")
+            @Html.ActionLink("创建普通维保工单", "MaintainworkOrderCreate", "Home")
 
             </li>
            
             <li class="layui-nav-item">
-                @Html.ActionLink("工单查询", "MaintainworkOrderQuery", "Home")
+                @Html.ActionLink("普通维保工单查询", "MaintainworkOrderQuery", "Home")
                
             </li>
             <li class="layui-nav-item">
-                @Html.ActionLink("维修派工", "MaintainworkOrderAssign", "Home")
+                @Html.ActionLink("普通维保派工", "MaintainworkOrderAssign", "Home")
             </li>
             <li class="layui-nav-item">
-                @Html.ActionLink("零件领取", "MaintainworkOrderGetParts", "Home")
+                @Html.ActionLink("零件材料领取单打印", "MaintainworkOrderGetParts", "Home")
             </li>
             <li class="layui-nav-item">
-                @Html.ActionLink("维修结算", "MaintainworkOrderCloseAccount", "Home")
+                @Html.ActionLink("普通维保结算", "MaintainworkOrderCloseAccount", "Home")
             </li>
           
 
@@ -34,27 +34,42 @@
 <div style="margin-top: 70px;">
 
     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
-        <legend>创建普通维修工单</legend>
+        <legend>创建普通维保工单</legend>
         <form class="layui-form" action="">
             <div style="padding: 20px; background-color: #F2F2F2;">
                 <div class="layui-row layui-col-space15">
                     <div class="layui-col-md12">
                         <div class="layui-card">
-                            <div class="layui-card-header">选择创建方式</div>
+                            <div class="layui-card-header" style="font-weight:600;">创建信息</div>
                             <div class="layui-card-body">
                                 <div class="layui-form-item">
                                     <div class="layui-inline">
-                                        <label class="layui-form-label" style="width:100px">创建方式：</label>
+                                        <label class="layui-form-label" style="width:auto;">创建方式</label>
+                                        <div class="layui-input-block">
+                                            <input type="radio" name="type" value="男" title="导入" checked="">
+                                            <input type="radio" name="type" value="女" title="新建">
+                                        </div>
+                                    </div>
+                                  
+                                    
+                                    
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:auto;">输入手机号</label>
                                         <div class="layui-input-inline">
                                             <select name="modules" lay-verify="required" lay-search="">
                                                 <option value="">直接选择或搜索选择</option>
-                                                <option value="1">手动创建</option>
-                                                <option value="2">预约单号导入</option>
-                                                <option value="3">手机号导入</option>
-                                                <option value="4">车牌号导入</option>
-                                                
+                                                <option value="1">13032917472 已预约</option>
+                                                <option value="2">15729029401 已预约</option>
+                                                <option value="3">18957920340 已预约</option>
+                                                <option value="4">12057002301 已预约</option>
+                                                <option value="5">16723947020 已预约</option>
+                                                <option value="6">18600938400 已预约</option>
+                                                <option value="7">13032817472 客户</option>
                                             </select>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -62,17 +77,17 @@
                     </div>
                     <div class="layui-col-md6">
                         <div class="layui-card">
-                            <div class="layui-card-header">用户信息</div>
+                            <div class="layui-card-header" style="font-weight:600;">用户信息</div>
                             <div class="layui-card-body">
                                 <div>
-                                    <label style="width:114px">姓名：</label>
+                                    <label style="width:114px;font-weight:500;">姓名：</label>
                                     <div class="layui-input-inline">
                                         <input type="text" class="layui-input" />
                                     </div>
                                     </div>
 
                                 <div style="margin-top:10px">
-                                    <label style="width:114px">电话：</label>
+                                    <label style="width:114px;font-weight:500;">电话：</label>
                                     <div class="layui-input-inline">
                                         <input type="text" class="layui-input" />
                                     </div>
@@ -83,22 +98,22 @@
                     </div>
                     <div class="layui-col-md6">
                         <div class="layui-card">
-                            <div class="layui-card-header">预约信息</div>
+                            <div class="layui-card-header" style="font-weight:600;">预约信息</div>
                             <div class="layui-card-body">
                                 <div>
-                                    <label style="width:114px">预约单号：</label>
+                                    <label style="width:114px;font-weight:500;">预约单号：</label>
                                     <div class="layui-input-inline">
                                         <input type="text" class="layui-input" />
                                     </div>
                                 </div>
                                 <div style="margin-top:10px">
-                                    <label style="width:114px">创建时间：</label>
+                                    <label style="width:114px;font-weight:500;">创建时间：</label>
                                     <div class="layui-input-inline">
                                         <input type="text" class="layui-input" />
                                     </div>
                                 </div>
                                 <div style="margin-top:10px">
-                                    <label style="width:114px">预约时间：</label>
+                                    <label style="width:114px;font-weight:500;">预约时间：</label>
                                     <div class="layui-input-inline">
                                         <input type="text" class="layui-input" />
                                     </div>
@@ -111,22 +126,22 @@
 
                     <div class="layui-col-md12">
                         <div class="layui-card">
-                            <div class="layui-card-header">车辆信息</div>
+                            <div class="layui-card-header" style="font-weight:600;">车辆信息</div>
                             <div class="layui-card-body">
                                 <div>
-                                    <label style="width:114px">品牌：</label>
+                                    <label style="width:114px;font-weight:500;">品牌：</label>
                                     <div class="layui-input-inline">
                                         <input type="text" class="layui-input" />
                                     </div>
                                 </div>
                                 <div style="margin-top:10px">
-                                    <label style="width:114px">车型：</label>
+                                    <label style="width:114px;font-weight:500;">车型：</label>
                                     <div class="layui-input-inline">
                                         <input type="text" class="layui-input" />
                                     </div>
                                 </div>
                                 <div style="margin-top:10px">
-                                    <label style="width:114px">车牌号：</label>
+                                    <label style="width:114px;font-weight:500;">车牌号：</label>
                                     <div class="layui-input-inline">
                                         <input type="text" class="layui-input" />
                                     </div>
@@ -139,10 +154,17 @@
 
                     <div class="layui-col-md12">
                         <div class="layui-card">
-                            <div class="layui-card-header">维修信息</div>
+                            <div class="layui-card-header" style="font-weight:600;">维修信息</div>
                             <div class="layui-card-body">
                                 <div class="layui-form-item">
-                                    故障现象：老是熄火
+                                    <div class="form-inline">
+                                        <label class="layui-form-label" style="width:114px">车辆故障现象</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input" value="老是熄火" />
+                                        </div>
+
+
+                                    </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <div class="form-inline">

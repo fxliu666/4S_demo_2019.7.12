@@ -9,22 +9,22 @@
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
             <li class="layui-nav-item">
-                @Html.ActionLink("创建工单", "MaintainworkOrderCreate", "Home")
+                @Html.ActionLink("创建普通维保工单", "MaintainworkOrderCreate", "Home")
 
             </li>
 
             <li class="layui-nav-item">
-                @Html.ActionLink("工单查询", "MaintainworkOrderQuery", "Home")
+                @Html.ActionLink("普通工单查询", "MaintainworkOrderQuery", "Home")
 
             </li>
             <li class="layui-nav-item">
-                @Html.ActionLink("维修派工", "MaintainworkOrderAssign", "Home")
+                @Html.ActionLink("普通维保派工", "MaintainworkOrderAssign", "Home")
             </li>
             <li class="layui-nav-item">
-                @Html.ActionLink("零件领取", "MaintainworkOrderGetParts", "Home")
+                @Html.ActionLink("零件材料领取单打印", "MaintainworkOrderGetParts", "Home")
             </li>
             <li class="layui-nav-item">
-                @Html.ActionLink("维修结算", "MaintainworkOrderCloseAccount", "Home")
+                @Html.ActionLink("普通维保结算", "MaintainworkOrderCloseAccount", "Home")
             </li>
 
 
@@ -34,12 +34,12 @@
 <div style="margin-top: 70px;">
 
     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
-        <legend>创建普通维修派工单</legend>
+        <legend>创建普通维保派工单</legend>
     </fieldset>
         <div style="padding: 20px; background-color: #F2F2F2;">
                 <form class="layui-form" action="">
-                    <div class="layui-row layui-col-space15">
-                        <div class="layui-form-item">
+                    <div class="layui-row layui-col-space15" id="total">
+                        <div class="layui-form-item" style="margin-bottom:0;">
                             <div class="layui-inline">
 
                                 <label class="layui-form-label" style="width:146px">搜索或选择工单号:</label>
@@ -51,14 +51,22 @@
 
                             </div>
                         </div>
-                        <div class="layui-col-md12">
+                        <div class="layui-col-md8">
                             <div class="layui-card">
-                                <div class="layui-card-header">维修信息</div>
+                                <div class="layui-card-header" style="font-weight:600;">维修信息</div>
                                 <div class="layui-card-body">
-                                    <div class="layui-form-item">
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label" style="width:114px">故障现象：</label>
-                                            <label class="layui-form-label" style="width:114px">发动机一直熄火，且有烧焦的气味</label>
+                                    <div>
+                                        <div class="layui-form-item">
+                                            <div class="form-inline">
+
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label" style="width:114px">车辆故障现象</label>
+                                                    <div class="layui-input-inline">
+                                                        <input type="text" class="layui-input" value="熄火" />
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="layui-form-item">
                                             <div class="form-inline">
@@ -98,9 +106,9 @@
                             </div>
 
                         </div>
-                        <div class="layui-col-md12">
+                        <div class="layui-col-md6" id="addProject">
                             <div class="layui-card">
-                                <div class="layui-card-header">创建派工单: </div>
+                                <div class="layui-card-header" style="font-weight:600;">创建派工单: </div>
                                 <div class="layui-card-body">
                                     <div>
                                         <input type="button" class="layui-btn layui-btn-radius layui-btn-primaryy" value="添加项目" onclick="addProject()" id="refuse" />
@@ -111,16 +119,20 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="layui-col-md6" id="project">
+                    </div>
+                    <div id="projects" class="layui-row layui-col-space30">
+                        <div class="project" style="display:none;">
+                        <div class="layui-col-md6">
                             <div class="layui-card">
-                                <div class="layui-card-header">维修项目</div>
+                                <div class="layui-card-header" style="font-weight:600;">维修项目
+                                        <input type="button" class="layui-btn layui-btn-radius layui-btn-danger layui-btn-xs delete-btn" value="删除" id="delete" onclick="deleteProject()"/>
+                                </div>
                                 <div class="layui-card-body">
                                     <div class="layui-form-item">
                                         <div class="layui-inline">
                                             <label class="layui-form-label" style="width:114px">选择维修项目</label>
                                             <div class="layui-input-inline">
-                                                <select name="modules" lay-verify="required" lay-search="">
+                                                <select lay-verify="required" lay-search="">
                                                     <option value="">直接选择或搜索选择</option>
                                                     <option value="1">layer</option>
                                                     <option value="2">form</option>
@@ -150,7 +162,7 @@
                                         <div class="layui-inline">
                                             <label class="layui-form-label" style="width:114px">选择维修小组</label>
                                             <div class="layui-input-inline">
-                                                <select name="modules" lay-verify="required" lay-search="">
+                                                <select name="modules2[]['ok4']" lay-verify="required" lay-search="">
                                                     <option value="">直接选择或搜索选择</option>
                                                     <option value="1">layer</option>
                                                     <option value="2">form</option>
@@ -180,7 +192,7 @@
                                         <div class="layui-inline">
                                             <label class="layui-form-label" style="width:114px">维修工时</label>
                                             <div class="layui-input-inline">
-                                                <select name="modules" lay-verify="required" lay-search="">
+                                                <select name="modules3[]['ok2']" lay-verify="required" lay-search="">
                                                     <option value="">直接选择或搜索选择</option>
                                                     <option value="1">layer</option>
                                                     <option value="2">form</option>
@@ -207,48 +219,36 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <input type="button" class="layui-btn layui-btn-radius layui-btn-primaryy" value="添加零件" onclick="addPart()" id="btn" />
+                                        <hr class="layui-bg-green">
                                     </div>
                                     <div class="layui-form-item" id="parts">
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label" style="width:114px">选择维修零件</label>
-                                            <div class="layui-input-inline">
-                                                <select name="modules" lay-verify="required" lay-search="">
+                                        <div class="layui-inline" style="height:22px;">
+                                            <label class="layui-form-label" style="padding:9px 5px 9px 0;font-size:12px;">选择维修零件</label>
+                                            <div class="layui-input-inline" style="width:100px;height:22px;">
+                                                <select name="modules4[]['ok']" lay-verify="required" lay-search="">
                                                     <option value="">直接选择或搜索选择</option>
-                                                    <option value="1">layer</option>
-                                                    <option value="2">form</option>
-                                                    <option value="3">layim</option>
-                                                    <option value="4">element</option>
-                                                    <option value="5">laytpl</option>
-                                                    <option value="6">upload</option>
-                                                    <option value="7">laydate</option>
-                                                    <option value="8">laypage</option>
-                                                    <option value="9">flow</option>
-                                                    <option value="10">util</option>
-                                                    <option value="11">code</option>
-                                                    <option value="12">tree</option>
-                                                    <option value="13">layedit</option>
-                                                    <option value="14">nav</option>
-                                                    <option value="15">tab</option>
-                                                    <option value="16">table</option>
-                                                    <option value="17">select</option>
-                                                    <option value="18">checkbox</option>
-                                                    <option value="19">switch</option>
-                                                    <option value="20">radio</option>
                                                 </select>
                                             </div>
+                                            <label class="layui-form-label" style="padding:9px 5px 9px 0;font-size:12px;width:auto;">零件数量</label>
+                                            <div class="layui-input-inline" style="width: 100px;height:22px;">
+                                                <select name="modules4[]['ok']" lay-verify="required" lay-search="" style="height:22px;">
+                                                    <option value="">直接选择或搜索选择</option>
+                                                </select>
+                                            </div>
+                                            <input type="button"  style="margin:3px 5px 0 0;" class="layui-btn layui-btn-radius layui-btn-primaryy layui-btn-sm" value="添加零件" onclick="addPart()" id="btn" />
+                                            
+                                            
 
                                         </div>
+                          
+                                        
 
 
 
                                     </div>
                                     <div class="layui-form-item" id="part">
                                         <div class="layui-inline">
-                                            <label class="layui-form-label" style="width:114px">零件数量</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" placeholder="请输入数量" class="layui-input" />
-                                            </div>
+                                            
 
 
                                         </div>
@@ -260,7 +260,7 @@
                                 </div>
                             </div>
                         </div>
-
+                            </div>
                     </div>
 </form>
             
@@ -283,19 +283,26 @@
     
 </div>
 <script>
-    layui.use('form', function () {
-        var form = layui.form();
-        form.render();
-    });
+    load();
+    function load() {
+        layui.use('form', function () {
+            var form = layui.form();
+            form.render();
+        });
+    }
     function pass() {
         window.location.href = "/Home/MaintainworkOrderCreate";
     }
+    function deleteProject() {
+        $("#delet").parent().parent().parent().remove();
+       
+    }
+    
     function refuse() {
 
     }
-
     function addProject() {
-        layui.use('layer', function () {
+        /*layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
                 type: 2,
@@ -308,7 +315,10 @@
                 skin: 'layui-layer-molv'
 
             });
-        })
+        })*/
+        var content = $(".project").html();
+        $("#projects").append(content);
+        load();
     }
     function addPart() {
         layui.use('layer', function () {

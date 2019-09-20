@@ -9,22 +9,22 @@
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
             <li class="layui-nav-item">
-                @Html.ActionLink("创建工单", "MaintainworkOrderCreate", "Home")
+                @Html.ActionLink("创建普通维保工单", "MaintainworkOrderCreate", "Home")
 
             </li>
 
             <li class="layui-nav-item">
-                @Html.ActionLink("工单查询", "MaintainworkOrderQuery", "Home")
+                @Html.ActionLink("普通维保工单查询", "MaintainworkOrderQuery", "Home")
 
             </li>
             <li class="layui-nav-item">
-                @Html.ActionLink("维修派工", "MaintainworkOrderAssign", "Home")
+                @Html.ActionLink("普通维保派工", "MaintainworkOrderAssign", "Home")
             </li>
             <li class="layui-nav-item">
-                @Html.ActionLink("零件领取", "MaintainworkOrderGetParts", "Home")
+                @Html.ActionLink("零件材料领取单打印", "MaintainworkOrderGetParts", "Home")
             </li>
             <li class="layui-nav-item">
-                @Html.ActionLink("维修结算", "MaintainworkOrderCloseAccount", "Home")
+                @Html.ActionLink("普通维保结算", "MaintainworkOrderCloseAccount", "Home")
             </li>
 
         </ul>
@@ -33,20 +33,17 @@
 <div style="margin-top:70px;">
     <fieldset>
 
-        <legend>普通维修零件领取</legend>
+        <legend>普通维保零件材料领取</legend>
         <div style="padding:20px;background-color:#F2F2F2">
             <div class="layui-row layui-col-space15">
                 <form class="layui-form" action="">
                     <div class="layui-form-item">
-                        <div class="layui-inline">
-
-                            <label class="layui-form-label" style="width:174px">搜索工单号或派工单号:</label>
-                            <div class="layui-input-inline">
-
-                                <select name="name" id="name" lay-filter="name" lay-verify="required" lay-search=""></select>
-
+                        <div class="demoTable">
+                            搜索工单号或领取单号
+                            <div class="layui-inline">
+                                <input class="layui-input" name="id" id="demoReload" autocomplete="off">
                             </div>
-
+                            <button class="layui-btn" data-type="reload">搜索</button>
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -62,16 +59,18 @@
 
 
 <script type="text/html" id="toolbarDemo">
-    <div class="layui-btn-container">
-        <div class="layui-input-inline">
 
-            <select name="modules" lay-verify="required" lay-search="">
-                <option value="">工单状态</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-                <option value="3">layim</option>
-                <option value="4">element</option>
-            </select>
+    <div class="layui-form-item" style="margin-bottom:0;">
+        <div class="form-inline">
+            <label class="layui-form-label" style="width:auto;padding:9px 10px;font-size:12px;">零件材料领取单状态</label>
+            <div class="layui-input-inline">
+                <select>
+                    <option value="1">已领取</option>
+                    <option value="2">待领取</option>
+                </select>
+            </div>
+
+
         </div>
     </div>
 </script>
@@ -146,14 +145,14 @@
 
 
                   , cols: [[ //标题栏
-                    { field: 'orderNum', title: '派工单号', width: 80 },
+                    { field: 'orderNum', title: '零件材料领取单号', width: 148 },
                     { field: 'workNum', title: '维修工单号', width: 80 },
                     { field: 'groupNum', title: '维修小组编号', width: 120 },
                     { field: 'maintainProj', title: '维修项目', width: 103 },
                     { field: 'maintainTime', title: '维修时间', width: 96 },
                     { field: 'AssignTime', title: '派工时间', width: 162 },
                     { field: 'maintainPeople', title: '维修人员', width: 119 },
-                    { field: 'state', title: '派工单状态', width: 102 },
+                    { field: 'state', title: '领取单状态', width: 102 },
                     { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 180 }
 
                   ]]
