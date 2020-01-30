@@ -11,10 +11,10 @@ namespace _4S.Domain.Entities
     /// </summary>
     public class Customer
     {
-        public Guid CustomerID { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public string UIdentity { get; set; }
+        public long customerID { get; set; }
+        public string customerName { get; set; }
+        public string customerPhone { get; set; }
+        public string customerAddress { get; set; }
+        public string customerPID { get; set; }
     }
 }

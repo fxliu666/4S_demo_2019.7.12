@@ -71,12 +71,12 @@
 
 
                   , cols: [[ //标题栏
-                    { field: 'CustomerID', title: '用户ID', width: 80, hide: true },
-                    { field: 'Rank', title: '编号', width: 80, type: 'numbers',fixed:'left' },
-                    { field: 'Name', title: '用户姓名', width: 116 },
-                    { field: 'Phone', title: '手机号', width: 127 },
-                    { field: 'Address', title: '住宅地址', width: 138 },
-                    { field: 'UIdentity', title: '身份证号', width: 204 },
+                    { field: 'customerID', title: '用户ID', width: 80, hide: true },
+                    { field: 'customerID', title: '编号', width: 80, type: 'numbers',fixed:'left' },
+                    { field: 'customerName', title: '用户姓名', width: 116 },
+                    { field: 'customerPhone', title: '手机号', width: 127 },
+                    { field: 'customerAddress', title: '住宅地址', width: 138 },
+                    { field: 'customerPID', title: '身份证号', width: 204 },
                     { field: 'right', title: '操作', toolbar: '#barDemo', width: 180 }
 
                   ]]
@@ -109,8 +109,8 @@
                         });
                     } else if (layEvent === 'edit') { //编辑
                         //do something
-                        layer.msg(data.Name);
-                        window.location.href = "/UserManage/EditUser?id=" + data.CustomerID;
+                        layer.msg(data.customerName);
+                        window.location.href = "/UserManage/EditUser?id=" + data.customerID;
                         //同步更新缓存对应的值
                         obj.update({
                             username: '123'

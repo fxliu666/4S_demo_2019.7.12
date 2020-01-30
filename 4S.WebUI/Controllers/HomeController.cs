@@ -33,7 +33,7 @@ namespace _4S.WebUI.Controllers
             return Json(Customers, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult PersonList(string name="")
+       /* public JsonResult PersonList(string name="")
         {
             table tt = new table();
             if (name == "")
@@ -59,7 +59,7 @@ namespace _4S.WebUI.Controllers
             //Response.Write(Json(Customers, JsonRequestBehavior.AllowGet).ToString());
            
             return Json(tt, JsonRequestBehavior.AllowGet);
-        }
+        }*/
 
         public PartialViewResult MaintainOrderMan()
         {
@@ -95,7 +95,7 @@ namespace _4S.WebUI.Controllers
             return Json(orders, JsonRequestBehavior.AllowGet);
         }
 
-
+        /*
         public ActionResult MaintainOrderCheck(string name = "")
         {
             var obj = from n in repository.Customers
@@ -105,7 +105,7 @@ namespace _4S.WebUI.Controllers
             Customer pass = obj.First();
             return View(pass);
         }
-
+        
         public ActionResult MaintainOrderEdit(string name = "")
         {
             var obj = from n in repository.Customers
@@ -114,7 +114,7 @@ namespace _4S.WebUI.Controllers
 
             Customer pass = obj.First();
             return View(pass);
-        }
+        }*/
 
 
         public ViewResult MaintainworkOrderCreate(string orderNum = "")
