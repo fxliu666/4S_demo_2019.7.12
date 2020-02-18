@@ -44,10 +44,10 @@ namespace _4S.WebUI.Controllers
             return View();
         }
 
-        public JsonResult LoadUsers()
+        public JsonResult LoadUsers(int page = 1, int limit = 10)
         {
-            table data = new table();
-            string query = "select * from CUSTOMER limit 10";
+            table<Customer> data = new table<Customer>();
+            string query = "select * from CUSTOMER limit " + ((page-1)*limit).ToString() + "," + limit.ToString();
             List<Customer> customers = (List<Customer>)db.Query<Customer>(query);
             data.data = customers;
             return Json(data, JsonRequestBehavior.AllowGet);
