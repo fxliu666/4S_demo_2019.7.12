@@ -18,6 +18,12 @@ namespace _4S.WebUI.Controllers
         // GET: UserManage
         public ActionResult UserManageIndex(FormCollection form)
         {
+            if (db.State == ConnectionState.Open)
+            {
+                db.Close();
+                db.Open();
+            }
+            else db.Open();
             if (form["name"] != null)
             {
                 string name = form["name"];
@@ -28,11 +34,11 @@ namespace _4S.WebUI.Controllers
                 if (form["id"] != null)
                 {
                     person.customerID = long.Parse(form["id"]);
-                    string updatesql = " UPDATE CUSTOMER SET customerName = @Name,customerPhone= @Phone,customerAddress = @Address,customerPID = @Idcard WHERE customerID = @CustomerID";
+                    string updatesql = " UPDATE CUSTOMER SET customerName = @CustomerName,customerPhone= @CustomerPhone,customerAddress = @CustomerAddress,customerPID = @CustomerPID WHERE customerID = @CustomerID";
                     db.Execute(updatesql, person);
                 }else
                 {
-                    db.Execute("insert into CUSTOMER(customerName,customerPhone,customerAddress,customerPID) values(@Name,@Phone,@Address,@Idcard)", person);
+                    db.Execute("insert into CUSTOMER(customerName,customerPhone,customerAddress,customerPID) values(@CustomerName,@CustomerPhone,@CustomerAddress,@CustomerPID)", person);
                 }
             }
             return View();
@@ -41,7 +47,7 @@ namespace _4S.WebUI.Controllers
         public JsonResult LoadUsers()
         {
             table data = new table();
-            string query = "select * from CUSTOMER";
+            string query = "select * from CUSTOMER limit 10";
             List<Customer> customers = (List<Customer>)db.Query<Customer>(query);
             data.data = customers;
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -63,15 +69,15 @@ namespace _4S.WebUI.Controllers
         }
 
         //删除用户
-       /* public JsonResult deleteuser(Guid id)
+        public JsonResult DeleteUser(long id)
         {
-            Customer person = new Customer() { CustomerID = id };
-            int result = db.Execute("delete from Customers where CustomerID=@CustomerID", person);
+            Customer person = new Customer() { customerID = id };
+            int result = db.Execute("delete from CUSTOMER where customerID=@CustomerID", person);
             if (result != 0)
             {
                 return Json(1, JsonRequestBehavior.AllowGet);
             }
             return Json(0,JsonRequestBehavior.AllowGet);
-        }*/
+        }
     }
 }

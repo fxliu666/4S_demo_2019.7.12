@@ -5,6 +5,7 @@ using System.Web;
 using _4S.Domain.Entities;
 namespace _4S.WebUI.Controllers
 {
+    
     public class table
     {
         public int code = 0;

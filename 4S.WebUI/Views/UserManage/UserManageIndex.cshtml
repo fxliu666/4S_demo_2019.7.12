@@ -72,7 +72,7 @@
 
                   , cols: [[ //标题栏
                     { field: 'customerID', title: '用户ID', width: 80, hide: true },
-                    { field: 'customerID', title: '编号', width: 80, type: 'numbers',fixed:'left' },
+                    { field: 'customerNum', title: '编号', width: 80, type: 'numbers',fixed:'left' },
                     { field: 'customerName', title: '用户姓名', width: 116 },
                     { field: 'customerPhone', title: '手机号', width: 127 },
                     { field: 'customerAddress', title: '住宅地址', width: 138 },
@@ -101,11 +101,13 @@
                         window.location.href = "/Home/MaintainOrderCheck?name=" + data.Name;
                     } else if (layEvent === 'delete') { //删除
                         console.log(data);
+                        console.log(data.customerID);
                         layer.confirm('确认删除吗', function (index) {
+                            //向服务端发送删除指令
+                            deleteUser(data.customerID);
                             obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                             layer.close(index);
-                            //向服务端发送删除指令
-                            deleteUser(data.CustomerID);
+                       
                         });
                     } else if (layEvent === 'edit') { //编辑
                         //do something
@@ -121,8 +123,8 @@
 
             })
         };
-        function deleteUser(id) {
-            $.post('/UserManage/deleteuser', { id: id }, function (res) {
+        function deleteUser(customerID) {
+            $.post('/UserManage/DeleteUser', { id: customerID }, function (res) {
                 if (res == 1) {
                     layer.msg("删除成功");
                 } else if (res == 0) {
