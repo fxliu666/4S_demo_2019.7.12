@@ -91,7 +91,10 @@
     <Compile Include="Abstract\ICustomersRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
+    <Compile Include="Entities\appointOrder.cs" />
+    <Compile Include="Entities\appointOrderModel.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\customerCar.cs" />
     <Compile Include="Entities\maintainOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

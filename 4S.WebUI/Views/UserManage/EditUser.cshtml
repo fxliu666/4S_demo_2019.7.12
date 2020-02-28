@@ -3,23 +3,7 @@
     Layout = "~/Views/Shared/_LayouthomePage.cshtml";
 }
 
-<div class="layui-side layui-bg-black" style="margin-top: 60px;">
-    <div class="layui-side-scroll">
-        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-        <ul class="layui-nav layui-nav-tree" lay-filter="test">
-            <li class="layui-nav-item layui-nav-itemed">
-                @Html.ActionLink("添加用户", "AddUser", "UserManage")
 
-            </li>
-            <li class="layui-nav-item">
-                @Html.ActionLink("查询用户", "UserManageIndex", "UserManage")
-
-            </li>
-
-
-        </ul>
-    </div>
-</div>
 <div style="margin-top: 70px;">
 
     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">

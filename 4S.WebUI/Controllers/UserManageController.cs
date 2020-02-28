@@ -46,6 +46,12 @@ namespace _4S.WebUI.Controllers
 
         public JsonResult LoadUsers(int page = 1, int limit = 10)
         {
+            if (db.State == ConnectionState.Open)
+            {
+                db.Close();
+                db.Open();
+            }
+            else db.Open();
             table<Customer> data = new table<Customer>();
             string query = "select * from CUSTOMER limit " + ((page-1)*limit).ToString() + "," + limit.ToString();
             List<Customer> customers = (List<Customer>)db.Query<Customer>(query);

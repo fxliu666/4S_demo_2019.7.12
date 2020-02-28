@@ -1,55 +1,8 @@
-﻿
-@{
+﻿@{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayouthomePage.cshtml";
 }
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
-
-    <div> 
-      
-        <h1>hello</h1>
-        <p id="json">jjjjjj</p>
-        <input type="submit" class="btn-default btn-primary" title="提交" onclick="load()"/>
-    </div>
-    <div id="mydiv">
-
-    </div>
-<table border="1" class="table table-striped">
-    <thead>
-        <tr>
-            <th>姓名</th>
-        </tr>
-    </thead>
-    <tbody id="tb">
-
-    </tbody>
-    <tfoot></tfoot>
-
-</table>
-    <script>
-        function load() {
-            $.get('@Url.Action("PersonList", "Home")')
-            .done(function (data) {
-                console.log(data);
-              
-                var temp = ""
-                $.each(data, function (index, person) {
-                    temp +=
-                    '<tr>' + '<td>' + person.Name + '</td>' + '</tr>';
-                     // $('#mydiv').append('<p>ID:' + person.PersonID + '</p>' + '<p>Name:' + person.Name + '</p>');
-                    
-                });
-                $('#tb').html(temp);
-                
-
-            })
-            .fail(function (data) {
-                alert(data);
-            });
-        }
-    </script>
+<div class="layadmin-tabsbody-item layui-show">
+    <iframe src="~/Layuiview/home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+</div>

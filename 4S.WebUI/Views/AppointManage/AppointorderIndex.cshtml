@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "AppointorderIndex";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">ID</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="email" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">性别</label>
+                    <div class="layui-input-block">
+                        <select name="sex">
+                            <option value="0">不限</option>
+                            <option value="1">男</option>
+                            <option value="2">女</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-user-front-search">
+                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-card-body">
+            <div style="padding:20px;background-color:#F2F2F2">
+                <div class="layui-row layui-col-space15">
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item">
+                            <table class="layui-show" id="tabledemo" lay-filter="tabledemo"></table>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function loaduser() {
+        $.post("/UserManage/LoadUsers", function (res) {
+            alert(res);
+        });
+    }
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script>
+    layui.use('element', function () {
+        var element = layui.element;
+
+    });
+    renderTable('');
+    function renderTable(m) {
+        layui.use('table', function () {
+            var table = layui.table;
+
+            //展示已知数据
+            table.render({
+                elem: '#tabledemo'
+                , method: 'post'
+                , url: '/AppointManage/LoadOrders'
+                //,where:{name:m}
+
+                , toolbar: '#toolbarDemo'
+                , title: '预约单表'
+                , totalRow: true
+
+
+            , cols: [[ //标题栏
+                { field: 'appointOrderID', title: '预约单ID', width: 80, hide: true },
+                { field: 'appointOrderNum', width: 80, type: 'numbers', fixed: 'left' },
+                { field: 'appointOrderNum', title: '预约单号', width:116},
+                { field: 'createTime', title: '创建时间', width: 116 },
+                { field: 'expectedTime', title: '预约时间', width: 127 },
+                { field: 'maintainType', title: '维修类型', width: 138 },
+                { field: 'appointOrderState', title: '状态', width: 204 },
+                { field: 'right', title: '操作', toolbar: '#barDemo', width: 180 }
+
+            ]]
+                //,skin: 'line' //表格风格
+            , page: true
+            , limit: 10
+            , even: true
+
+
+                //,page: true //是否显示分页
+                , limits: [10]
+                //,limit: 5 //每页默认显示的数量
+
+            });
+
+            //监听工具条
+            table.on('tool(tabledemo)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                var data = obj.data; //获得当前行数据
+                var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+                var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+                if (layEvent === 'detail') { //查看
+                    layer.msg(data.Name);
+                    window.location.href = "/Home/MaintainOrderCheck?name=" + data.Name;
+                } else if (layEvent === 'delete') { //删除
+                    console.log(data);
+                    console.log(data.customerID);
+                    layer.confirm('确认删除吗', function (index) {
+                        //向服务端发送删除指令
+                        deleteUser(data.customerID);
+                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                        layer.close(index);
+
+                    });
+                } else if (layEvent === 'check') { //编辑
+                    //do something
+                    layer.msg(data.appointOrderID);
+                    window.location.href = "/AppointManage/CheckOrder?id=" + data.appointOrderID;
+                    //同步更新缓存对应的值
+                    obj.update({
+                        username: '123'
+                    , title: 'xxx'
+                    });
+                }
+            });
+
+        })
+    };
+    function deleteUser(customerID) {
+        $.post('/UserManage/DeleteUser', { id: customerID }, function (res) {
+            if (res == 1) {
+                layer.msg("删除成功");
+            } else if (res == 0) {
+                layer.msg("服务器繁忙，请重试");
+            }
+        });
+    }
+
+
+
+</script>
+
