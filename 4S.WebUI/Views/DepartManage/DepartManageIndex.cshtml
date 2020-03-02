@@ -1,8 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "AppointorderIndex";
+    ViewBag.Title = "DepartManageIndex";
     Layout = "~/Views/Shared/_LayouthomePage.cshtml";
 }
+
+
 
 <div class="layui-fluid">
     <div class="layui-card">
@@ -20,20 +22,24 @@
                         <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-    
                 <div class="layui-inline">
-                    <label class="layui-form-label">审核状态</label>
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="email" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">性别</label>
                     <div class="layui-input-block">
                         <select name="sex">
-                            <option value="0">所有</option>
-                            <option value="1">待审核</option>
-                            <option value="2">已通过</option>
-                            <option value="3">已打回</option>
+                            <option value="0">不限</option>
+                            <option value="1">男</option>
+                            <option value="2">女</option>
                         </select>
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-user-front-search" onclick="query();">
+                    <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-user-front-search">
                         <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                     </button>
                 </div>
@@ -44,24 +50,7 @@
                 <div class="layui-row layui-col-space15">
                     <form class="layui-form" action="">
                         <div class="layui-form-item">
-                            <table class="layui-show" id="tabledemo" lay-filter="tabledemo" style="background-color:#c2c2c2"></table>
-                            <script type="text/html" id="buttonTpl">
-                                {{#  if(d.appointOrderState== 1){ }}
-                                <button class="layui-btn layui-btn-primary layui-btn-xs">待审核</button>
-                                {{#  } else if(d.appointOrderState == 2){ }}
-                                <button class="layui-btn layui-btn-normal layui-btn-xs">已通过</button>
-                                {{#  } else{ }}
-                                <button class="layui-btn layui-btn-warm layui-btn-xs">已打回</button>
-                                {{#  } }}
-                            </script>
-                            <script type="text/html" id="barDemo">
-                                {{# if(d.appointOrderState == 1){ }}
-                                <a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
-                                {{# } else{ }}
-                                <a class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
-                                <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
-                                {{# } }}
-                            </script>
+                            <table class="layui-show" id="tabledemo" lay-filter="tabledemo"></table>
                         </div>
                     </form>
 
@@ -76,19 +65,18 @@
             alert(res);
         });
     }
-    function query() {
-        var select = $('select').val();
-        renderTable(select);
-    }
 </script>
 
-
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
 <script>
     layui.use('element', function () {
         var element = layui.element;
 
     });
-    renderTable(0);
+    renderTable('');
     function renderTable(m) {
         layui.use('table', function () {
             var table = layui.table;
@@ -97,34 +85,33 @@
             table.render({
                 elem: '#tabledemo'
                 , method: 'post'
-                , url: '/AppointManage/LoadOrders'
-                ,where:{code:m}
+                , url: '/DepartManage/LoadDeparts'
+                //,where:{name:m}
 
                 , toolbar: '#toolbarDemo'
-                , title: '预约单表'
+                , title: '用户数据表'
                 , totalRow: true
 
 
             , cols: [[ //标题栏
-                { field: 'appointOrderID', title: '预约单ID', width: 80, hide: true },
-                { field: 'appointOrderNum', width: 80, type: 'numbers', fixed: 'left', align: 'center' },
-                { field: 'appointOrderNum', title: '预约单号', width: 150, align: 'center' },
-                { field: 'createTime', title: '创建时间', width: 170, sort: 'true', align: 'center' },
-                { field: 'expectedTime', title: '预约时间', width: 170, align: 'center' },
-                { field: 'maintainType', title: '维修类型', width: 120, align: 'center' },
-                { field: 'appointOrderState', title: '状态', templet: '#buttonTpl', unresize: true, width: 200, align: 'center' },
-                { field: 'right', title: '操作', toolbar: '#barDemo', width: 180, fixed: 'right', align: 'center' }
+                { field: 'departID', title: '部门ID', width: 80, hide: true },
+                { field: 'departNum', width: 80, fixed: 'left', type: 'numbers' },
+                { field: 'departNum', title: '部门编号', width: 80,fixed: 'left' },
+                { field: 'departName', title: '部门名称', width: 116 },
+                { field: 'departLevel', title: '部门等级', width: 127 },
+                { field: 'createTime', title: '创建时间', width: 138 },
+                { field: 'createStaffID', title: '创建人', width: 204 },
+                { field: 'right', title: '操作', toolbar: '#barDemo', width: 180, align: 'right' }
 
             ]]
-                , done: function (res, curr, count) {
-                    $('th').css({ 'background-color': '#E3E9F5', 'color': '#026392' });
-                    $('table').css({ 'background-color': '#EAF6F6' })
-                }
+                 , done: function (res, curr, count) {
+                     $('th').css({ 'background-color': '#E3E9F5', 'color': '#026392' });
+                 }
                 //,skin: 'line' //表格风格
             , page: true
             , limit: 10
             , even: true
-            , skin: 'row' //行边框风格
+            , skin: 'row'
 
 
                 //,page: true //是否显示分页
@@ -140,8 +127,8 @@
                 var tr = obj.tr; //获得当前行 tr 的DOM对象
 
                 if (layEvent === 'detail') { //查看
-                    layer.msg(data.appointOrderID);
-                    window.location.href = "/AppointManage/OrderDetail?id=" + data.appointOrderID;
+                    layer.msg(data.Name);
+                    window.location.href = "/Home/MaintainOrderCheck?name=" + data.Name;
                 } else if (layEvent === 'delete') { //删除
                     console.log(data);
                     console.log(data.customerID);
@@ -152,10 +139,10 @@
                         layer.close(index);
 
                     });
-                } else if (layEvent === 'check') { //编辑
+                } else if (layEvent === 'edit') { //编辑
                     //do something
-                    layer.msg(data.appointOrderID);
-                    window.location.href = "/AppointManage/CheckOrder?id=" + data.appointOrderID;
+                    layer.msg(data.customerName);
+                    window.location.href = "/UserManage/EditUser?id=" + data.customerID;
                     //同步更新缓存对应的值
                     obj.update({
                         username: '123'
@@ -179,4 +166,3 @@
 
 
 </script>
-

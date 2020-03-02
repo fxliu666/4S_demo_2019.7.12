@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "AddDepart";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+
+
+<div class="layui-fluid">
+
+
+
+    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+        <legend>新建部门</legend>
+    </fieldset>
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">部门信息</div>
+                    <div class="layui-card-body">
+
+                        <form class="layui-form layui-form-pane" action="">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">部门名称:</label>
+                                <div class="layui-input-inline">
+                                    <input id="departname" type="text" name="departname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">选择上级:</label>
+                                <div class="layui-input-inline">
+                                    <select name="quiz1" lay-filter="level" id="level">
+                                        <option value="">请选择上级部门等级</option>
+                                        <option value="1">一级</option>
+                                        <option value="2">二级</option>
+                                        <option value="3">三级</option>
+                                    </select>
+                                </div>
+                                <div class="layui-input-inline" lay-filter="name">
+                                    <select id="parent" lay-filter="parent">
+                                        <option value="">请选择上级部门</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <input name="id" value="" type="hidden" />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div style="margin-top: 20px;">
+    <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+        <input type="submit" class="layui-btn layui-btn-radius layui-btn-normal" value="确定" onclick="check()"/>
+        &nbsp;&nbsp;&nbsp;
+        <input type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="返回" onclick="goback()"/>
+    </div>
+</div>
+<script>
+
+    function goback(){
+        window.location.href = "/DepartManage/DepartManageIndex";
+    }
+
+    function check() {
+        $.post('/DepartManage/AddResult', { parentId: $('#parent').val(), level: $('#level').val(), name: $('#departname').val() }, function (res) {
+            if (res == 1) {
+                layer.msg("添加成功！");
+                window.location.href = "/DepartManage/DepartManageIndex";
+            }
+            else if(res == 0){
+                layer.msg("添加失败，请重试。");
+            }
+        });
+    }
+
+</script>
+<script>
+    function render() {
+        layui.use('form', function () {
+            var form = layui.form;
+            form.render();
+        });
+    }
+    layui.use(['laydate','form'], function () {
+        var laydate = layui.laydate;
+        var form = layui.form;
+        form.on('select(level)',function(data){
+            $.post('/DepartManage/DepartSelect', { id: data.value }, function (res) {
+                var result = res.data;
+                var htmls = "";
+                for (var x in result) {
+                    htmls += '<option value = "' + result[x].departID + '">' + result[x].departName + '</option>';
+                } 
+                $("#parent").html(htmls);
+                render();
+                console.log($("#parent").html());
+            
+            });
+            
+        });
+
+
+        //常规用法
+        laydate.render({
+            elem: '#ordertime',
+            type: 'datetime',
+            format: 'yyyy/M/d H:m:s'
+        });
+    });
+</script>

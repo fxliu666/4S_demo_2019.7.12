@@ -8,18 +8,20 @@ namespace _4S.Domain.Entities
 {
     public class maintainOrder
     {
-        public Guid maintainOrder_id { get; set; }
-        public string maintainOrder_num { get; set; }
-        public DateTime createTime { get; set; }
-        public Guid clientCar_id { get; set; }
-        public DateTime firstOrder_time { get; set; }
-        public DateTime finalOrder_time { get; set; }
-        public string maintainType  { get; set; }
-        public string faultPhenomenon { get; set; }
-        public string wayTostore { get; set; }
-        public string reasonForrefuse { get; set; }
-        public Guid checkStaff_id { get; set; }
-        public DateTime checkTIme { get; set; }
-        public int maintainOrderstate { get; set; }
+        public long maintainOrderID { get; set; }
+        public string maintainOrderNum { get; set; }
+        public long maintainAppointID { get; set; }
+        public long customerCarID{ get; set; }
+        public long createStaffID { get; set; }
+        public string createTime { get; set; }
+        public string faultDescript  { get; set; }
+        public string expectedProjects { get; set; }
+        public decimal expectedPrice { get; set; }
+        public string actualProjects { get; set; }
+        public decimal actualPrice { get; set; }
+        public string expectedPickTime { get; set; }
+        public string actualPickTime { get; set; }
+        public long pickStaffID { get; set; }
+        public int orderState { get; set; }
     }
 }

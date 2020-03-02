@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "AppointorderIndex";
+    ViewBag.Title = "MaintainorderIndex";
     Layout = "~/Views/Shared/_LayouthomePage.cshtml";
 }
 
@@ -9,95 +9,80 @@
         <div class="layui-form layui-card-header layuiadmin-card-header-auto">
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">ID</label>
+                    <label class="layui-form-label">工单号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                        <input type="text" name="orderid" placeholder="请输入" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">用户名</label>
+                    <label class="layui-form-label">工单标题</label>
                     <div class="layui-input-block">
-                        <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-    
-                <div class="layui-inline">
-                    <label class="layui-form-label">审核状态</label>
-                    <div class="layui-input-block">
-                        <select name="sex">
-                            <option value="0">所有</option>
-                            <option value="1">待审核</option>
-                            <option value="2">已通过</option>
-                            <option value="3">已打回</option>
-                        </select>
+                        <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-user-front-search" onclick="query();">
+                    <label class="layui-form-label">业务性质</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="attr" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">受理人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="accept" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-app-order-search">
                         <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                     </button>
                 </div>
             </div>
         </div>
         <div class="layui-card-body">
-            <div style="padding:20px;background-color:#F2F2F2">
-                <div class="layui-row layui-col-space15">
-                    <form class="layui-form" action="">
-                        <div class="layui-form-item">
-                            <table class="layui-show" id="tabledemo" lay-filter="tabledemo" style="background-color:#c2c2c2"></table>
-                            <script type="text/html" id="buttonTpl">
-                                {{#  if(d.appointOrderState== 1){ }}
-                                <button class="layui-btn layui-btn-primary layui-btn-xs">待审核</button>
-                                {{#  } else if(d.appointOrderState == 2){ }}
-                                <button class="layui-btn layui-btn-normal layui-btn-xs">已通过</button>
-                                {{#  } else{ }}
-                                <button class="layui-btn layui-btn-warm layui-btn-xs">已打回</button>
-                                {{#  } }}
-                            </script>
-                            <script type="text/html" id="barDemo">
-                                {{# if(d.appointOrderState == 1){ }}
-                                <a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
-                                {{# } else{ }}
-                                <a class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
-                                <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
-                                {{# } }}
-                            </script>
-                        </div>
-                    </form>
-
+            <table id="tabledemo" lay-filter="LAY-app-system-order"></table>
+            <script type="text/html" id="progressTpl">
+                <div class="layui-progress layuiadmin-order-progress" lay-filter="progress-" + {{ d.maintainOrderID }} +"">
+                    <div class="layui-progress-bar layui-bg-blue" lay-percent={{ (d.orderState/4.0)*100 + "%" }}></div>
                 </div>
-            </div>
+            </script>
+            <script type="text/html" id="buttonTpl">
+                {{#  if(d.orderState == 1){ }}
+                <button class="layui-btn layui-btn-primary layui-btn-xs">待派工</button>
+                {{#  } else if(d.orderState == 2){ }}
+                <button class="layui-btn layui-btn-warm layui-btn-xs">维修中</button>
+                {{#  } else if(d.orderState == 3){ }}
+                <button class="layui-btn layui-btn-xs">待缴费</button>
+                {{#  } else if(d.orderState == 4){ }}
+                <button class="layui-btn layui-btn-normal layui-btn-xs">已完成</button>
+                {{#  } }}
+            </script>
+            <script type="text/html" id="barDemo">
+                {{# if(d.orderState == 1){ }}
+                <a class="layui-btn layui-btn-xs" lay-event="check">派工</a>
+                {{# } else{ }}
+                <a class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+                {{# } }}
+            </script>
+            <script type="text/html" id="table-system-order">
+                <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+            </script>
         </div>
     </div>
 </div>
-<script>
-    function loaduser() {
-        $.post("/UserManage/LoadUsers", function (res) {
-            alert(res);
-        });
-    }
-    function query() {
-        var select = $('select').val();
-        renderTable(select);
-    }
-</script>
-
 
 <script>
-    layui.use('element', function () {
-        var element = layui.element;
-
-    });
     renderTable(0);
     function renderTable(m) {
-        layui.use('table', function () {
+        layui.use(['table','element'], function () {
             var table = layui.table;
-
+            var element = layui.element;
             //展示已知数据
             table.render({
                 elem: '#tabledemo'
                 , method: 'post'
-                , url: '/AppointManage/LoadOrders'
+                , url: '/MaintainManage/LoadOrders'
                 ,where:{code:m}
 
                 , toolbar: '#toolbarDemo'
@@ -106,19 +91,22 @@
 
 
             , cols: [[ //标题栏
-                { field: 'appointOrderID', title: '预约单ID', width: 80, hide: true },
-                { field: 'appointOrderNum', width: 80, type: 'numbers', fixed: 'left', align: 'center' },
-                { field: 'appointOrderNum', title: '预约单号', width: 150, align: 'center' },
-                { field: 'createTime', title: '创建时间', width: 170, sort: 'true', align: 'center' },
-                { field: 'expectedTime', title: '预约时间', width: 170, align: 'center' },
-                { field: 'maintainType', title: '维修类型', width: 120, align: 'center' },
-                { field: 'appointOrderState', title: '状态', templet: '#buttonTpl', unresize: true, width: 200, align: 'center' },
+                { field: 'maintainOrderID', title: '维保工单ID', hide: true },
+                { field: 'maintainOrderNum', width: 80, type: 'numbers', fixed: 'left', align: 'center' },
+                { field: 'maintainOrderNum', title: '维保工单号', width: 150, align: 'center' },
+                { field: 'maintainAppointID', title: '预约单id', width: 80, sort: 'true', align: 'center' },
+                { field: 'customerCarID', title: '客户车辆id', width: 80, align: 'center' },
+                { field: 'createStaffID', title: '创建员工id', width: 80, align: 'center' },
+                { field: 'createTime', title: '创建时间', width: 170, align: 'center' },
+                { field: 'process', title: '进度', templet: '#progressTpl', width: 200, align: 'center' },
+                { field: 'orderState', title: '工单状态', templet: '#buttonTpl', unresize: true, width: 200, align: 'center' },
                 { field: 'right', title: '操作', toolbar: '#barDemo', width: 180, fixed: 'right', align: 'center' }
 
             ]]
                 , done: function (res, curr, count) {
                     $('th').css({ 'background-color': '#E3E9F5', 'color': '#026392' });
-                    $('table').css({ 'background-color': '#EAF6F6' })
+                    $('table').css({ 'background-color': '#EAF6F6' });
+                    element.render();
                 }
                 //,skin: 'line' //表格风格
             , page: true
@@ -179,4 +167,5 @@
 
 
 </script>
+
 

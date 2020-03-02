@@ -1,0 +1,207 @@
+﻿
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+
+<div class="layui-fluid">
+
+
+
+    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+        <legend>预约单</legend>
+    </fieldset>
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">用户信息</div>
+                    <div class="layui-card-body">
+
+                        <form class="layui-form" action="">
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">用户姓名:</label>
+                                    <label class="layui-form-label" style="padding:9px 10px;color:#999;" id="name"></label>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">手机号:</label>
+                                    <label class="layui-form-label" style="padding:9px 10px;color:#999;" id="phone"></label>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">住宅地址:</label>
+                                    <label class="layui-form-label" style="padding:9px 10px;color:#999;" id="address"></label>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">身份证号:</label>
+                                    <label class="layui-form-label" style="padding:9px 10px;color:#999;" id="pid"></label>
+                                </div>
+                            </div>
+                            <input name="id" value="" type="hidden" />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">车俩信息</div>
+                    <div class="layui-card-body">
+                        <form class="layui-form" action="">
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">车辆编号:</label>
+                                    <label class="layui-form-label" style="padding:9px 0px;color:#999;" id="carnum"></label>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">车型:</label>
+                                    <label class="layui-form-label" style="padding:9px 0px;color:#999;" id="cartype"></label>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">购买日期:</label>
+                                    <label class="layui-form-label" style="padding:9px 0px;color:#999;" id="buydate"></label>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">车牌号:</label>
+                                    <label class="layui-form-label" style="padding:9px 0px;color:#999;" id="license"></label>
+                                </div>
+                            </div>
+                            <input name="id" value="" type="hidden" />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">预约信息</div>
+                    <div class="layui-card-body">
+                        <form class="layui-form" action="">
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">预约单号:</label>
+                                    <label class="layui-form-label" style="padding:9px 0px;color:#999;" id="ordernum"></label>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">创建时间:</label>
+                                    <label class="layui-form-label" style="padding:9px 0px;color:#999;" id="createtime"></label>
+
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">预约时间:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" id="ordertime" placeholder="yyyy-MM-dd">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">维保类型:</label>
+                                    <div class="layui-input-block">
+                                        <select name="interest" lay-filter="aihao" id="maintaintype">
+                                            <option value="0">普通维修</option>
+                                            <option value="1">普通保养</option>
+                                            <option value="2">三包期内维修</option>
+                                            <option value="3">首次保养</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="padding:9px 10px;">到店方式:</label>
+                                    <div class="layui-input-block">
+                                        <select name="interest" lay-filter="aihao" id="gotype">
+                                            <option value="0">拖车</option>
+                                            <option value="1">自送</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label" style="padding:9px 5px;">故障描述:</label>
+                                <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea" id="faultdes"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label" style="padding:9px 5px;">打回原因:</label>
+                                <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea" id="failrea"></textarea>
+                                </div>
+
+                            </div>
+
+                            <input name="id" value="" type="hidden" />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 20px;">
+    <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+        <input style="align-content:center" type="submit" class="layui-btn layui-btn-radius layui-btn-primary" value="返回" onclick="goback()" id="pass" />
+    </div>
+</div>
+<script>
+    //layui.use('layer', function () {
+    //    var layer = layui.layer;
+
+    //    layer.msg('hello');
+    //});
+    loadData(@ViewBag.id);
+    function loadData(ID) {
+        $.post('/AppointManage/LoadData', { id: ID }, function (res) {
+            $('#name').text(res.cus.customerName);
+            $('#phone').text(res.cus.customerPhone);
+            $('#address').text(res.cus.customerAddress);
+            $('#pid').text(res.cus.customerPID);
+            $('#carnum').text(res.car.customerCarNum);
+            $('#cartype').text(res.car.carType);
+            $('#buydate').text(res.car.buyDate);
+            $('#license').text(res.car.licenseNum);
+            $('#ordernum').text(res.order.appointOrderNum);
+            $('#createtime').text(res.order.createTime);
+            $('#ordertime').val(res.order.expectedTime);
+            $('#maintaintype').val("0");
+            $('#faultdes').val(res.order.faultDescript);
+            $('#gotype').val("1");
+            $('#failrea').val(res.order.failReason);
+            console.log(res);
+        });
+    }
+
+    function goback(){
+        window.location.href = "/AppointManage/AppointorderIndex";
+    }
+</script>
+<script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        //常规用法
+        laydate.render({
+            elem: '#ordertime',
+            type: 'datetime',
+            format: 'yyyy/M/d H:m:s'
+        });
+    });
+</script>

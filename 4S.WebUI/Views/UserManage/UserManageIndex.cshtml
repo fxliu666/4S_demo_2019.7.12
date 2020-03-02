@@ -89,22 +89,29 @@
                 , toolbar: '#toolbarDemo'
                 , title: '用户数据表'
                 , totalRow: true
+                , cellMinWidth: 80
 
 
             , cols: [[ //标题栏
                 { field: 'customerID', title: '用户ID', width: 80, hide: true },
-                { field: 'customerNum', title: '编号', width: 80, type: 'numbers', fixed: 'left' },
-                { field: 'customerName', title: '用户姓名', width: 116 },
-                { field: 'customerPhone', title: '手机号', width: 127 },
-                { field: 'customerAddress', title: '住宅地址', width: 138 },
-                { field: 'customerPID', title: '身份证号', width: 204 },
-                { field: 'right', title: '操作', toolbar: '#barDemo', width: 180 }
+                { field: 'customerNum', title: '编号', width: 80, type: 'numbers', fixed: 'left', align: 'center' },
+                { field: 'customerName', title: '用户姓名', width: 116, align: 'center' },
+                { field: 'customerPhone', title: '手机号', width: 127, align: 'center' },
+                { field: 'customerAddress', title: '住宅地址', width: 138, align: 'center' },
+                { field: 'customerPID', title: '身份证号', width: 204, align: 'center'},
+                { field: 'right', title: '操作', toolbar: '#barDemo', width: 180, align: 'center'}
 
             ]]
+                 , done: function (res, curr, count) {
+                     $('th').css({ 'background-color': '#E3E9F5', 'color': '#026392' });
+                     $('table').css({ 'background-color': '#EAF6F6' })
+                 }
                 //,skin: 'line' //表格风格
             , page: true
             , limit: 10
             , even: true
+            , skin: 'row'
+            , width:'full'
 
 
                 //,page: true //是否显示分页

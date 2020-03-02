@@ -20,12 +20,32 @@ namespace _4S.WebUI.Controllers
             return View();
         }
 
-        public JsonResult LoadOrders(int page = 1, int limit = 10)
+        public JsonResult LoadOrders(int page = 1, int limit = 10,int code = 0)
         {
             CheckConnect();
             table<appointOrder> data = new table<appointOrder>();
-            string query = "select * from APPOINT_ORDER limit " + ((page - 1) * limit).ToString() + "," + limit.ToString();
-            List<appointOrder> orders = (List<appointOrder>)db.Query<appointOrder>(query);
+            string query;
+            List<appointOrder> orders;
+            if (code == 0)
+            {
+                query = "select * from APPOINT_ORDER limit " + ((page - 1) * limit).ToString() + "," + limit.ToString();
+                orders = (List<appointOrder>)db.Query<appointOrder>(query);
+            }
+            else if(code == 1)
+            {
+                query = "select * from APPOINT_ORDER where appointOrderState = 1 limit " + ((page - 1) * limit).ToString() + "," + limit.ToString();
+                orders = (List<appointOrder>)db.Query<appointOrder>(query);
+            }
+            else if(code == 2)
+            {
+                query = "select * from APPOINT_ORDER where appointOrderState = 2 limit " + ((page - 1) * limit).ToString() + "," + limit.ToString();
+                orders = (List<appointOrder>)db.Query<appointOrder>(query);
+            }
+            else
+            {
+                query = "select * from APPOINT_ORDER where appointOrderState = 3 limit " + ((page - 1) * limit).ToString() + "," + limit.ToString();
+                orders = (List<appointOrder>)db.Query<appointOrder>(query);
+            }
             data.data = orders;
             return Json(data, JsonRequestBehavior.AllowGet);
         }
@@ -74,6 +94,13 @@ namespace _4S.WebUI.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
 
+        }
+
+        //预约单详情
+        public ViewResult OrderDetail(int id)
+        {
+            ViewBag.id = id;
+            return View(ViewBag.id);
         }
 
         public void CheckConnect()

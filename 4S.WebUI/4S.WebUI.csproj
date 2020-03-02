@@ -1072,6 +1072,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DapperService.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\DepartManageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaintainManageController.cs" />
     <Compile Include="Controllers\maintainOrderList_message.cs" />
@@ -1129,6 +1130,10 @@
     <Content Include="Views\MaintainManage\WorkorderIndex.cshtml" />
     <Content Include="Views\AppointManage\AppointorderIndex.cshtml" />
     <Content Include="Views\AppointManage\CheckOrder.cshtml" />
+    <Content Include="Views\DepartManage\DepartManageIndex.cshtml" />
+    <Content Include="Views\AppointManage\OrderDetail.cshtml" />
+    <Content Include="Views\MaintainManage\MaintainorderIndex.cshtml" />
+    <Content Include="Views\DepartManage\AddDepart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
