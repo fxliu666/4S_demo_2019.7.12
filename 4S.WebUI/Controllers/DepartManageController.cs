@@ -20,6 +20,12 @@ namespace _4S.WebUI.Controllers
             return View();
         }
 
+        // GET: DepartManage
+        public ActionResult StaffManageIndex()
+        {
+            return View();
+        }
+
 
         //返回部门信息
         public JsonResult LoadDeparts(int page = 1, int limit = 10)
@@ -33,6 +39,34 @@ namespace _4S.WebUI.Controllers
 
         }
 
+        //返回员工信息
+        public JsonResult LoadStaff(int page = 1, int limit = 10)
+        {
+            CheckConnect();
+            string query = "SELECT * FROM STAFF_BASE limit " + ((page - 1) * limit).ToString() + "," + limit.ToString();
+            table<staff> data = new table<staff>();
+            List<staff> staff = (List<staff>)db.Query<staff>(query);
+            data.data = staff;
+            return Json(data, JsonRequestBehavior.AllowGet);
+
+        }
+
+        //返回单个员工信息
+        public JsonResult LoadSingleStaff(int id)
+        {
+            CheckConnect();
+            string query1 = "SELECT * FROM STAFF_BASE WHERE staffID = @Id";
+            string query2 = "SELECT * FROM DEPART_BASE WHERE departID = @Id";      
+            string query4 = "SELECT * FROM DEPART_BASE WHERE departLevel = @Level";
+            staff sta = (staff)db.Query<staff>(query1,new { Id = id }).SingleOrDefault();
+            depart dep = (depart)db.Query<depart>(query2, new { Id = sta.departID }).SingleOrDefault();
+            List<depart> deps = (List<depart>)db.Query<depart>(query4, new { Level = dep.departLevel });
+            string query3 = "SELECT classNum,className FROM CLASS_ITEM WHERE classNum LIKE '020" + dep.departLevel.ToString() + "%'";
+            List<position> pos = (List<position>)db.Query<position>(query3);
+            staffInfoModel model = new staffInfoModel { sta = sta, dep = dep, deps = deps, pos = pos };
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
         //添加部门
         public ViewResult AddDepart()
         {
@@ -43,11 +77,21 @@ namespace _4S.WebUI.Controllers
         //选择部门
         public JsonResult DepartSelect(int id)
         {
-            CheckConnect();
             string query = "select * from DEPART_BASE where departLevel = @Level";
             table<depart> data = new table<depart>();
             List<depart> departs = (List<depart>)db.Query<depart>(query, new { Level = id });
             data.data = departs;
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        //选择职位
+        public JsonResult PositionSelect(int id)
+        {
+            CheckConnect();
+            string query = "SELECT * FROM CLASS_ITEM WHERE classNum LIKE '020" + id.ToString() + "%'";
+            table<position> data = new table<position>();
+            List<position> positions = (List<position>)db.Query<position>(query);
+            data.data = positions;
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -78,6 +122,66 @@ namespace _4S.WebUI.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+
+        //添加员工
+        public ViewResult AddStaff()
+        {
+            return View();
+        }
+        //添加员工结果
+        public JsonResult AddStaffResult(string staffName,string passwd,string phone,long departId,string position)
+        {
+            CheckConnect();
+            string query = "SELECT * FROM STAFF_BASE ORDER BY staffID DESC LIMIT 1";
+            staff temp = (staff)db.Query<staff>(query).SingleOrDefault();
+            string staffNum = "";
+            if (temp == null)
+            {
+                staffNum = "E01001";
+            }
+            else
+            {
+                int num = int.Parse(temp.staffNum.Substring(temp.staffNum.Length - 3))+1;
+                if (num < 10)
+                {
+                    staffNum += "E0100";
+                }
+                else if (num < 100)
+                {
+                    staffNum += "E010";
+                }
+                else staffNum += "E01";
+                staffNum += num.ToString();
+            }
+           
+            
+            string sql = "INSERT INTO STAFF_BASE(staffNum,staffName,departID,staffPosition,staffAccount,staffPasswd,staffPhone) VALUES(@Num,@Name,@Id,@Position,@Account,@Passwd,@Phone)";
+            int result = db.Execute(sql, new { Num = staffNum, Name = staffName, Id = departId, Position = position, Account = "", Passwd = passwd, Phone = phone });
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+        //编辑员工信息
+        public ViewResult EditStaff(long id)
+        {
+            ViewBag.id = id;
+            return View(ViewBag.id);
+        }
+
+        //修改员工信息
+        public JsonResult UpdateStaffResult(long id, string name, long departid, string position, 
+            string account, string passwd, string phone)
+        {
+            CheckConnect();
+            int result = 0;
+            string set = "UPDATE STAFF_BASE SET staffName = @Name, departID = @Departid, staffPosition ="+
+                          "@Position, staffAccount = @Account, staffPasswd = @Passwd, staffPhone ="+
+                          "@Phone where staffID = @Id";           
+            result = db.Execute(set, new { Name = name, Departid = departid, Position = position,
+                                            Account = account, Passwd = passwd, Phone = phone, Id = id});
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public void CheckConnect()
         {
             if (db.State == ConnectionState.Open) db.Close();

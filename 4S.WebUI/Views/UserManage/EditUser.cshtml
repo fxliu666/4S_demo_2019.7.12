@@ -1,13 +1,17 @@
 ﻿@model _4S.Domain.Entities.Customer
+@{ 
     ViewBag.Title = "EditUser";
     Layout = "~/Views/Shared/_LayouthomePage.cshtml";
 }
 
 
 <div style="margin-top: 70px;">
-
-    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
-        <legend>添加用户</legend>
+    <div>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="goback()"><i class="layui-icon"></i></button> 
+        <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+                <legend>编辑用户</legend>             
+        </fieldset>
+    </div>
         <form class="layui-form" action="UserManageIndex" method="post">
             <div style="padding: 20px; background-color: #F2F2F2;">
 
@@ -62,7 +66,7 @@
 
 
 
-    </fieldset>
+    
 </div>
 <script>
     //layui.use('layer', function () {
@@ -70,6 +74,10 @@
 
     //    layer.msg('hello');
     //});
+
+    function goback() {
+        window.location.href = "/UserManage/UserManageIndex";
+    }
     function check(form) {
         if (form.name.value == "" || form.phone.value == '' || form.address.value == '' || form.idcard.value == '') {
             layer.alert("请输入完整信息");

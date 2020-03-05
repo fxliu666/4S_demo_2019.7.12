@@ -97,6 +97,9 @@
     <Compile Include="Entities\customerCar.cs" />
     <Compile Include="Entities\depart.cs" />
     <Compile Include="Entities\maintainOrder.cs" />
+    <Compile Include="Entities\position.cs" />
+    <Compile Include="Entities\staff.cs" />
+    <Compile Include="Entities\staffInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

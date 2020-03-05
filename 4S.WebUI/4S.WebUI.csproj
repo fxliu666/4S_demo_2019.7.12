@@ -1134,6 +1134,9 @@
     <Content Include="Views\AppointManage\OrderDetail.cshtml" />
     <Content Include="Views\MaintainManage\MaintainorderIndex.cshtml" />
     <Content Include="Views\DepartManage\AddDepart.cshtml" />
+    <Content Include="Views\DepartManage\AddStaff.cshtml" />
+    <Content Include="Views\DepartManage\StaffManageIndex.cshtml" />
+    <Content Include="Views\DepartManage\EditStaff.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

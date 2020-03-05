@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewBag.Title = "EditStaff";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+
+<fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+    <legend>修改员工信息</legend>
+</fieldset>
+<div>
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">员工信息</div>
+                    <div class="layui-card-body">
+
+                        <form class="layui-form layui-form-pane" action="">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">员工编号:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text"lay-verify="required" autocomplete="off" class="layui-input" id="num">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">员工姓名:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" lay-verify="required" autocomplete="off" class="layui-input" id="name">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">所属部门:</label>
+                                <div class="layui-input-inline">
+                                    <select name="quiz1" lay-filter="level" id="level">
+                                        <option value="">部门级别</option>
+                                        <option value="1">一级</option>
+                                        <option value="2">二级</option>
+                                        <option value="3">三级</option>
+                                    </select>
+                                </div>
+                                <div class="layui-input-inline">
+                                    <select name="quiz2" id="departid">
+                                        <option value="">部门名称</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">职位:</label>
+                                <div class="layui-input-inline">
+                                    <select name="quiz1" id="position">
+                                        <option value="">职级</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">账号:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" lay-verify="required" autocomplete="off" class="layui-input" id="account">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">密码:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" lay-verify="required" autocomplete="off" class="layui-input" id="passwd">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">手机号:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" lay-verify="required" autocomplete="off" class="layui-input" id="phone">
+                                </div>
+                            </div>
+                           
+             
+                            <input id="id" value="" type="hidden" />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+<div style="margin-top: 20px;">
+    <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+        <input style="align-content:center" type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="提交" onclick="check()" id="check" />
+        &nbsp;&nbsp;&nbsp;
+        <input style="align-content:center" type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="返回" onclick="goback()" id="pass" />
+    </div>
+</div>
+<script>
+    function render() {
+        layui.use('form', function () {
+            var form = layui.form;
+            form.render();
+        });
+    }
+    //layui.use('layer', function () {
+    //    var layer = layui.layer;
+
+    //    layer.msg('hello');
+    //});
+    loadData(@ViewBag.id);
+    
+    function loadData(ID) {
+        $.post('/DepartManage/LoadSingleStaff', { id: ID }, function (res) {
+            $("#id").val(res.sta.staffID);
+            $('#num').val(res.sta.staffNum);
+            $('#name').val(res.sta.staffName);
+            $('#level').find("option[value='" + res.dep.departLevel + "']").prop("selected", true);;
+            var result1 = res.deps;
+            var html1s = "";
+            for (var x in result1) {
+                html1s += '<option value = "' + result1[x].departID + '">' + result1[x].departName + '</option>';
+            }
+            
+            $("#departid").html(html1s);
+            var result2 = res.pos;
+            var html2s = "";
+            for (var x in result2) {
+                html2s += '<option value = "' + result2[x].classNum + '">' + result2[x].className + '</option>';
+            }
+            
+            $("#position").html(html2s);
+            $("#departid").find("option:contains('"+ res.dep.departName + "')").attr("selected", true);
+            $("#position").find("option:contains('"+ res.sta.staffPosition + "')").attr("selected", true);
+            $('#account').val(res.sta.staffAccount);
+            $('#passwd').val(res.sta.staffPasswd);
+            $('#phone').val(res.sta.staffPhone);
+            console.log(res.dep.departLevel);
+            console.log(res.dep.departName);
+            console.log(res.sta.staffPosition);
+            render();
+        });
+       
+    }
+    function check() {
+        $.post('/DepartManage/UpdateStaffResult', {
+            id: $("#id").val(),
+            name: $("#name").val(), departid: $("#departid").val(), position: $("#position").find("option:selected").text(),
+            account: $("#account").val(), passwd: $("#passwd").val(), phone: $("#phone").val()
+        }, function (res) {
+            if (res == 1) {
+                layer.msg("修改成功！");
+                setTimeout(function () {
+                    window.location.href = "/DepartManage/StaffManageIndex";
+                }, 500);
+            }
+            else {
+                layer.msg("修改失败！请重试");
+            }
+        });
+    }
+
+    function goback(){
+        window.location.href = "/DepartManage/StaffManageIndex";
+    }
+</script>
+<script>
+    function load(value) {
+        $.post('/DepartManage/PositionSelect', { id: value }, function (res) {
+            console.log(value);
+            var result = res.data;
+            var htmls = "";
+            for (var x in result) {
+                htmls += '<option value = "' + result[x].classNum + '">' + result[x].className + '</option>';
+            }
+            $("#position").html(htmls);
+            render();
+        });
+    }   
+    layui.use(['laydate', 'form'], function () {
+        var laydate = layui.laydate;
+        var form = layui.form;
+        form.on('select(level)', function (data) {
+
+            $.post('/DepartManage/DepartSelect', { id: data.value }, function (res) {
+                var result = res.data;
+                var htmls = "";
+                for (var x in result) {
+                    htmls += '<option value = "' + result[x].departID + '">' + result[x].departName + '</option>';
+                }
+                $("#departid").html(htmls);
+                load(data.value);
+                render();
+            });
+            
+
+
+        });
+
+
+        //常规用法
+        laydate.render({
+            elem: '#ordertime',
+            type: 'datetime',
+            format: 'yyyy/M/d H:m:s'
+        });
+    });
+</script>

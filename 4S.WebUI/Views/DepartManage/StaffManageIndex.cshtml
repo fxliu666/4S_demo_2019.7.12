@@ -1,9 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "DepartManageIndex";
+    ViewBag.Title = "StaffManageIndex";
     Layout = "~/Views/Shared/_LayouthomePage.cshtml";
 }
-
 
 
 <div class="layui-fluid">
@@ -85,7 +84,7 @@
             table.render({
                 elem: '#tabledemo'
                 , method: 'post'
-                , url: '/DepartManage/LoadDeparts'
+                , url: '/DepartManage/LoadStaff'
                 //,where:{name:m}
 
                 , toolbar: '#toolbarDemo'
@@ -94,14 +93,12 @@
 
 
             , cols: [[ //标题栏
-                { field: 'departID', title: '部门ID', width: 80, hide: true },
-                { field: 'Num', width: 80, fixed: 'left', type: 'numbers', align: 'center' },
-                { field: 'departNum', title: '部门编号', width: 120, fixed: 'left', align: 'center' },
-                { field: 'departName', title: '部门名称', width: 120, align: 'center' },
-                { field: 'departLevel', title: '部门等级', width: 120, align: 'center' },
-                { field: 'createTime', title: '创建时间', width: 180, align: 'center' },
-                { field: 'createStaffID', title: '创建人', width: 80, align: 'center' },
-                { field: 'right', title: '操作', toolbar: '#barDemo', width: 180, align: 'center' }
+                { field: 'staffID', title: '员工ID', width: 80, hide: true },
+                { field: 'staffNum', width: 80, fixed: 'left', type: 'numbers' },
+                { field: 'staffNum', title: '员工编号', width: 120,fixed: 'left' },
+                { field: 'staffName', title: '员工姓名', width: 120 },
+                { field: 'staffPosition', title: '职位', width: 180 },
+                { field: 'right', title: '操作', toolbar: '#barDemo', width: 180, align: 'right' }
 
             ]]
                  , done: function (res, curr, count) {
@@ -142,8 +139,11 @@
                     });
                 } else if (layEvent === 'edit') { //编辑
                     //do something
-                    layer.msg(data.customerName);
-                    window.location.href = "/UserManage/EditUser?id=" + data.customerID;
+                    layer.msg(data.staffName);
+                    setTimeout(function () {
+                        window.location.href = "/DepartManage/EditStaff?id=" + data.staffID;
+                    }, 500);
+                    
                     //同步更新缓存对应的值
                     obj.update({
                         username: '123'

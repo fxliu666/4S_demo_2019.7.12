@@ -156,7 +156,7 @@
                 </div>
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-                    <li data-name="home" class="layui-nav-item layui-nav-itemed">
+                    <li data-name="home" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="主页" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>主页</cite>
@@ -173,14 +173,15 @@
                             </dd>
                         </dl>
                     </li>
-                    <li data-name="user" class="layui-nav-item">
+                    <li data-name="user" class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;" lay-tips="用户管理" lay-direction="2">
                             <i class="layui-icon layui-icon-user"></i>
                             <cite>用户管理</cite>
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
-                                @Html.ActionLink("查询用户", "UserManageIndex", "UserManage")
+                                <a lay-href="/UserManage/UserManageIndex" href="/UserManage/UserManageIndex" id="queryUser">查询用户</a>
+                               
                             </dd>
                             <dd>
                                 @Html.ActionLink("添加用户", "AddUser", "UserManage")
@@ -237,13 +238,10 @@
                                 @Html.ActionLink("新建部门", "AddDepart", "DepartManage")
                             </dd>
                             <dd>
-                                <a lay-href="user/administrators/role.html">角色管理</a>
+                                @Html.ActionLink("查询员工", "StaffManageIndex", "DepartManage")
                             </dd>
                             <dd>
-                                @Html.ActionLink("查询员工", "QueryEmployee", "DepartManage")
-                            </dd>
-                            <dd>
-                                @Html.ActionLink("新建员工", "AddEmployee", "DepartManage")
+                                @Html.ActionLink("新建员工", "AddStaff", "DepartManage")
                             </dd>
                         </dl>
                     </li>
