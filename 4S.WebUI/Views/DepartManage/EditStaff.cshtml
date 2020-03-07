@@ -19,9 +19,7 @@
                         <form class="layui-form layui-form-pane" action="">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">员工编号:</label>
-                                <div class="layui-input-inline">
-                                    <input type="text"lay-verify="required" autocomplete="off" class="layui-input" id="num">
-                                </div>
+                                <label class="layui-form-label" style="padding:9px 0px;color:#999;" id="num"></label>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">员工姓名:</label>
@@ -107,7 +105,7 @@
     function loadData(ID) {
         $.post('/DepartManage/LoadSingleStaff', { id: ID }, function (res) {
             $("#id").val(res.sta.staffID);
-            $('#num').val(res.sta.staffNum);
+            $('#num').text(res.sta.staffNum);
             $('#name').val(res.sta.staffName);
             $('#level').find("option[value='" + res.dep.departLevel + "']").prop("selected", true);;
             var result1 = res.deps;

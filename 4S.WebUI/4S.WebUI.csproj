@@ -1137,6 +1137,10 @@
     <Content Include="Views\DepartManage\AddStaff.cshtml" />
     <Content Include="Views\DepartManage\StaffManageIndex.cshtml" />
     <Content Include="Views\DepartManage\EditStaff.cshtml" />
+    <Content Include="Views\DepartManage\EditDepart.cshtml" />
+    <Content Include="Views\DepartManage\PartManageIndex.cshtml" />
+    <Content Include="Views\DepartManage\ProjectManageIndex.cshtml" />
+    <Content Include="Views\DepartManage\AddPart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "EditDepart";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+
+
+<fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+    <legend>修改部门信息</legend>
+</fieldset>
+<div>
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">部门信息</div>
+                    <div class="layui-card-body">
+
+                        <form class="layui-form layui-form-pane" action="">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">部门编号:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" lay-verify="required" autocomplete="off" class="layui-input" id="num" disabled="disabled">         
+                                </div>
+                                
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">部门名称:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" lay-verify="required" autocomplete="off" class="layui-input" id="name">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">部门等级:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" lay-verify="required" autocomplete="off" class="layui-input" id="level" disabled="disabled"> 
+                                </div>
+                                
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">创建时间:</label>
+                                <div class="layui-input-block">
+                                    <input type="text" lay-verify="required" autocomplete="off" class="layui-input" id="time" disabled="disabled"> 
+                                </div>
+                                
+                            </div>
+                            <input id="id" value="" type="hidden" />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div style="margin-top: 20px;">
+    <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+        <input style="align-content:center" type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="提交" onclick="check()" id="check" />
+        &nbsp;&nbsp;&nbsp;
+        <input style="align-content:center" type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="返回" onclick="goback()" id="pass" />
+    </div>
+</div>
+<script>
+    function render() {
+        layui.use('form', function () {
+            var form = layui.form;
+            form.render();
+        });
+    }
+    //layui.use('layer', function () {
+    //    var layer = layui.layer;
+
+    //    layer.msg('hello');
+    //});
+    loadData(@ViewBag.id);
+
+    function loadData(ID) {
+        $.post('/DepartManage/LoadSingleDepart', { id: ID }, function (res) {
+            $("#id").val(res.departID);
+            $('#num').val(res.departNum);
+            $('#name').val(res.departName);
+            $('#level').val(res.departLevel);
+            $('#time').val(res.createTime);
+        });
+
+    }
+    function check() {
+        $.post('/DepartManage/UpdateDepartResult', {
+            id: $("#id").val(),
+            name: $("#name").val() }, function (res) {
+            if (res == 1) {
+                layer.msg("修改成功！");
+                setTimeout(function () {
+                    window.location.href = "/DepartManage/DepartManageIndex";
+                }, 500);
+            }
+            else {
+                layer.msg("修改失败！请重试");
+            }
+        });
+    }
+
+    function goback(){
+        window.location.href = "/DepartManage/DepartManageIndex";
+    }
+</script>
+<script>
+    function load(value) {
+        $.post('/DepartManage/PositionSelect', { id: value }, function (res) {
+            console.log(value);
+            var result = res.data;
+            var htmls = "";
+            for (var x in result) {
+                htmls += '<option value = "' + result[x].classNum + '">' + result[x].className + '</option>';
+            }
+            $("#position").html(htmls);
+            render();
+        });
+    }
+    layui.use(['laydate', 'form'], function () {
+        var laydate = layui.laydate;
+        var form = layui.form;
+        form.on('select(level)', function (data) {
+
+            $.post('/DepartManage/DepartSelect', { id: data.value }, function (res) {
+                var result = res.data;
+                var htmls = "";
+                for (var x in result) {
+                    htmls += '<option value = "' + result[x].departID + '">' + result[x].departName + '</option>';
+                }
+                $("#departid").html(htmls);
+                load(data.value);
+                render();
+            });
+
+
+
+        });
+
+
+        //常规用法
+        laydate.render({
+            elem: '#ordertime',
+            type: 'datetime',
+            format: 'yyyy/M/d H:m:s'
+        });
+    });
+</script>
