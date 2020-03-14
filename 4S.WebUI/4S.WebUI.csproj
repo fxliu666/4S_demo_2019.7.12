@@ -160,6 +160,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ElementUI\element-ui.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -941,7 +942,10 @@
     <Content Include="layuiAdmin.pro-v1.2.1\start\layui\font\iconfont.woff" />
     <Content Include="layuiAdmin.pro-v1.2.1\帮助\官网.url" />
     <Content Include="layuiAdmin.pro-v1.2.1\帮助\文档.url" />
+    <Content Include="Content\ElementUI\fonts\element-icons.woff" />
+    <Content Include="Content\ElementUI\fonts\element-icons.ttf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\ElementUI\element-ui.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -1062,6 +1066,8 @@
     <Content Include="Layuiview\user\user\list.html" />
     <Content Include="Layuiview\user\user\userform.html" />
     <Content Include="Layuiview\user\说明.txt" />
+    <Content Include="Scripts\vue.js" />
+    <Content Include="Scripts\vue.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1141,6 +1147,8 @@
     <Content Include="Views\DepartManage\PartManageIndex.cshtml" />
     <Content Include="Views\DepartManage\ProjectManageIndex.cshtml" />
     <Content Include="Views\DepartManage\AddPart.cshtml" />
+    <Content Include="Views\MaintainManage\AddMaintainOrder.cshtml" />
+    <Content Include="Views\MaintainManage\AssignWorkOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

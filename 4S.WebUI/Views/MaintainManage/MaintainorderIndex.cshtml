@@ -40,7 +40,8 @@
             </div>
         </div>
         <div class="layui-card-body">
-            <table id="tabledemo" lay-filter="LAY-app-system-order"></table>
+
+            <table id="tabledemo" lay-filter="tabledemo"></table>
             <script type="text/html" id="progressTpl">
                 <div class="layui-progress layuiadmin-order-progress" lay-filter="progress-" + {{ d.maintainOrderID }} +"">
                     <div class="layui-progress-bar layui-bg-blue" lay-percent={{ (d.orderState/4.0)*100 + "%" }}></div>
@@ -59,7 +60,7 @@
             </script>
             <script type="text/html" id="barDemo">
                 {{# if(d.orderState == 1){ }}
-                <a class="layui-btn layui-btn-xs" lay-event="check">派工</a>
+                <a class="layui-btn layui-btn-xs" lay-event="assign">派工</a>
                 {{# } else{ }}
                 <a class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
                 <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
@@ -73,6 +74,9 @@
 </div>
 
 <script>
+    function go() {
+        window.location.href = "/MaintainManage/AssignWorkOrder?id=1";
+    }
     renderTable(0);
     function renderTable(m) {
         layui.use(['table','element'], function () {
@@ -140,10 +144,10 @@
                         layer.close(index);
 
                     });
-                } else if (layEvent === 'check') { //编辑
+                } else if (layEvent === 'assign') { //派工
                     //do something
-                    layer.msg(data.appointOrderID);
-                    window.location.href = "/AppointManage/CheckOrder?id=" + data.appointOrderID;
+                    layer.msg(data.maintainOrderID);
+                    window.location.href = "/MaintainManage/AssignWorkOrder?id=" + data.maintainOrderID;
                     //同步更新缓存对应的值
                     obj.update({
                         username: '123'

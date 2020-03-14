@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/Content/bootstrap.css" >
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/layui/layui.js"></script>
+    <script src="~/Scripts/vue.js"></script>
 </head>
 <body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
@@ -218,7 +219,7 @@
                                 @Html.ActionLink("查询工单", "MaintainorderIndex", "MaintainManage")
                             </dd>
                             <dd>
-                                @Html.ActionLink("新建工单", "AddUser", "UserManage")
+                                @Html.ActionLink("新建工单", "AddMaintainOrder", "MaintainManage")
                             </dd>
                             <dd>
                                 <a lay-href="user/administrators/role.html">角色管理</a>

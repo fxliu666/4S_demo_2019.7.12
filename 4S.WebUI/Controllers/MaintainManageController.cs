@@ -111,6 +111,26 @@ namespace _4S.WebUI.Controllers
             return View(ViewBag.id);
         }
 
+
+        //新建维保工单
+        public ViewResult AddMaintainOrder()
+        {
+            return View();
+        }
+
+        //导入用户信息或预约单信息
+        public JsonResult LoadCusOrAppoint()
+        {
+            CheckConnect();
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
+        //派工
+        public ViewResult AssignWorkOrder(long id)
+        {
+            ViewBag.id = id;
+            return View(ViewBag.id);
+        }
         public void CheckConnect()
         {
             if (db.State == ConnectionState.Open) db.Close();

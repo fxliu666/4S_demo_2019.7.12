@@ -1,0 +1,421 @@
+﻿
+@{
+    ViewBag.Title = "AssignWorkOrder";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+
+<div class="layui-fluid">
+
+    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+        <legend>工单派工</legend>
+    </fieldset>
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15" id="total">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">工单信息</div>
+                    <div class="layui-card-body">
+
+                        <form class="layui-form layui-form-pane" action="">
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">工单号</label>
+
+
+                                    <input id="type" type="text" list="typelist" placeholder="请选择">
+                                    <datalist id="typelist">
+                                        <option>Dimond</option>
+                                        <option>vertical</option>
+                                    </datalist>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">预约单号</label>
+
+
+                                    <input id="type" type="text" list="typelist" placeholder="请选择">
+                                    <datalist id="typelist">
+                                        <option>Dimond</option>
+                                        <option>vertical</option>
+                                    </datalist>
+
+
+                                    <div class="layui-input-inline">
+                                        <select name="quiz" lay-search="" id="load">
+                                            <option value="">请选择问题</option>
+                                            <optgroup label="城市记忆">
+                                                <option value="你工作的第一个城市">你工作的第一个城市</option>
+                                            </optgroup>
+                                            <optgroup label="学生时代">
+                                                <option value="你的工号">你的工号</option>
+                                                <option value="你最喜欢的老师">你最喜欢的老师</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">客户姓名:</label>
+                                <div class="layui-input-inline">
+                                    <input id="name" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">手机号</label>
+                                <div class="layui-input-inline">
+                                    <input id="partname" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">车辆编号:</label>
+                                <div class="layui-input-inline">
+                                    <input id="partname" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">创建时间:</label>
+                                <div class="layui-input-inline">
+                                    <input id="partname" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">创建员工:</label>
+                                <div class="layui-input-inline">
+                                    <input id="partname" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">故障描述</label>
+                                <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea" id="descript"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">预计项目</label>
+                                <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea" id="descript"></textarea>
+                                </div>
+                            </div>
+                            <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="添加项目" onclick="addProject()" />
+                            <input value="0" type="hidden" id="isorigin" />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+        <form class="layui-form">
+            <div class="layui-row layui-col-space15 projects">
+
+
+                <div class="project" style="display:none;">
+
+                    <div class="layui-col-md9 PJitem">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                <span>添加项目</span>
+                                <button type="button" style="right:25px;" onclick="deleteProject(this)"><i class="layui-icon"></i></button>
+                                
+               
+                            </div>
+                            <div class="layui-card-body">
+
+                                <div class="layui-form-item">
+
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:114px">维修项目</label>
+                                        <div class="layui-input-inline">
+                                            <select name="modules" lay-verify="required" lay-search="">
+                                                <option value="">直接选择或搜索选择</option>
+                                                <option value="1">layer</option>
+                                                <option value="2">form</option>
+                                                <option value="3">layim</option>
+                                                <option value="4">element</option>
+                                                <option value="5">laytpl</option>
+                                                <option value="6">upload</option>
+                                                <option value="7">laydate</option>
+                                                <option value="8">laypage</option>
+                                                <option value="9">flow</option>
+                                                <option value="10">util</option>
+                                                <option value="11">code</option>
+                                                <option value="12">tree</option>
+                                                <option value="13">layedit</option>
+                                                <option value="14">nav</option>
+                                                <option value="15">tab</option>
+                                                <option value="16">table</option>
+                                                <option value="17">select</option>
+                                                <option value="18">checkbox</option>
+                                                <option value="19">switch</option>
+                                                <option value="20">radio</option>
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="layui-form-item">
+
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:114px">维修小组</label>
+                                        <div class="layui-input-inline">
+                                            <select name="modules" lay-verify="required" lay-search="">
+                                                <option value="">直接选择或搜索选择</option>
+                                                <option value="1">layer</option>
+                                                <option value="2">form</option>
+                                                <option value="3">layim</option>
+                                                <option value="4">element</option>
+                                                <option value="5">laytpl</option>
+                                                <option value="6">upload</option>
+                                                <option value="7">laydate</option>
+                                                <option value="8">laypage</option>
+                                                <option value="9">flow</option>
+                                                <option value="10">util</option>
+                                                <option value="11">code</option>
+                                                <option value="12">tree</option>
+                                                <option value="13">layedit</option>
+                                                <option value="14">nav</option>
+                                                <option value="15">tab</option>
+                                                <option value="16">table</option>
+                                                <option value="17">select</option>
+                                                <option value="18">checkbox</option>
+                                                <option value="19">switch</option>
+                                                <option value="20">radio</option>
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" style="width:114px">选择维修零件</label>
+                                        <div class="layui-input-inline">
+                                            <select name="modules" lay-verify="required" lay-search="">
+                                                <option value="">直接选择或搜索选择</option>
+                                                <option value="1">layer</option>
+                                                <option value="2">form</option>
+                                                <option value="3">layim</option>
+                                                <option value="4">element</option>
+                                                <option value="5">laytpl</option>
+                                                <option value="6">upload</option>
+                                                <option value="7">laydate</option>
+                                                <option value="8">laypage</option>
+                                                <option value="9">flow</option>
+                                                <option value="10">util</option>
+                                                <option value="11">code</option>
+                                                <option value="12">tree</option>
+                                                <option value="13">layedit</option>
+                                                <option value="14">nav</option>
+                                                <option value="15">tab</option>
+                                                <option value="16">table</option>
+                                                <option value="17">select</option>
+                                                <option value="18">checkbox</option>
+                                                <option value="19">switch</option>
+                                                <option value="20">radio</option>
+                                            </select>
+                                        </div>
+                                        <label class="layui-form-label" style="width:114px">数量</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" placeholder="请输入数量" class="layui-input" id="num" />
+                                        </div>
+                                        <button type="button" class="layui-btn" onclick="addPart(this)">
+                                            <i class="layui-icon">&#xe608;</i> 添加
+                                        </button>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="layui-form-item parts">
+
+                                    <div class="part" style="display:none;">
+                                        <div class="Pitem">
+                                            <label>名称</label>
+                                            <label>数量</label>
+                                            <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" onclick="deletePart(this)"><i class="layui-icon"></i></button>
+             
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+            </div>
+
+    
+
+        </div>
+<button onclick="numeric()">数量</button>
+        <div style="margin-top: 20px;">
+            <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+                <input type="submit" class="layui-btn layui-btn-radius layui-btn-normal" value="确定" onclick="check()" />
+                &nbsp;&nbsp;&nbsp;
+                <input type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="返回" onclick="goback()" />
+            </div>
+        </div>
+        <script>
+            function numeric() {
+                alert($('.PJitem').length);
+            }
+            function render() {
+                layui.use('form', function () {
+                    var form = layui.form;
+                    form.render();
+                });
+            }
+            $("#name").bind('input porpertychange', function () {
+                console.log("e");
+            });
+            function addProject() {
+                var content = $('.project').html();
+                $('.projects').append(content);
+                render();
+               
+                
+                
+            }
+         
+            function deleteProject(obj) {
+                layer.confirm('确定删除吗?', { icon: 3, title: '提示' }, function (index) {
+                    //do something
+                    var Index = $(obj).parent().parent().parent().index();
+                    $(obj).parent().parent().parent().remove();
+                    layer.close(index);
+                    layer.msg(Index);
+                });
+                
+            }
+            function addPart(obj) {
+                var content = $('.part').html();
+                $(obj).parent().parent().next().append(content);
+                render();
+            }
+
+            function deletePart(obj) {
+                var Index = $(obj).parent().index();
+                layer.msg(Index);
+                $(obj).parent().remove();
+            }
+
+
+            loadData();
+
+            function loadData() {
+                $.post('/MaintainManage/LoadCusOrAppoint', {}, function (res) {
+                    var htmls = "";
+                    for (var x in res) {
+                        htmls += '<option value = "' + res[x].classNum + '">' + res[x].className + '</option>';
+                    }
+                    $("#class1").html(htmls);
+                    render();
+                });
+
+            }
+
+            function goback() {
+                window.location.href = "/MaintainManage/MaintainorderIndex";
+            }
+
+            function check() {
+                $.post('/DepartManage/AddPartResult', {
+                    partName: $('#partname').val(), isOrigin: $('#isorigin').val(), id:
+                                                        $('#class2').find("option:selected").val(), qualification: $('#descript').val()
+                }, function (res) {
+                    if (res == 1) {
+                        setTimeout(function () {
+                            layer.msg("添加成功！");
+                            window.location.href = "/DepartManage/PartManageIndex";
+                        }, 500);
+
+                    }
+                    else if (res == 0) {
+                        layer.msg("添加失败，请重试。");
+                    }
+                });
+            }
+            function load(value) {
+                $.post('/DepartManage/PositionSelect', { id: value }, function (res) {
+                    console.log(value);
+                    var result = res.data;
+                    var htmls = "";
+                    for (var x in result) {
+                        htmls += '<option value = "' + result[x].classNum + '">' + result[x].className + '</option>';
+                    }
+                    $("#position").html(htmls);
+                    render();
+
+                });
+            }
+
+        </script>
+        <script>
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    message: "Hello Vue!"
+                }
+            });
+            var app2 = new Vue({
+                el: '#app-2',
+                data: {
+                    message: "页面加载与" + new Date().toLocaleString()
+                }
+            });
+            var app3 = new Vue({
+                el: "#app-3",
+                data: {
+                    seen: true
+                }
+            });
+            var app4 = new Vue({
+                el: '#app-4',
+                data: {
+                    todos: [
+                        { text: "今天开始好好学习" },
+                        { text: "我也要好好学习" },
+                        { text: "我也是" }
+                    ]
+                }
+            });
+            var app5 = new Vue({
+                el: '#app-5',
+                data: {
+                    message: "Hello Vue.js!"
+                },
+                methods: {
+                    reverseMessage: function () {
+                        this.message = this.message.split('').reverse().join('')
+                    }
+                }
+            });
+            var app6 = new Vue({
+                el: "#app-6",
+                data: {
+                    message: "hello"
+                }
+            })
+        </script>
+
