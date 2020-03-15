@@ -131,6 +131,29 @@ namespace _4S.WebUI.Controllers
             ViewBag.id = id;
             return View(ViewBag.id);
         }
+
+        //派工单model
+        public JsonResult LoadWorkOrder()
+        {
+            CheckConnect();
+            string query1 = "SELECT * FROM MAINTAIN_PROJECT";
+            string query2 = "SELECT * FROM DEPART_BASE WHERE departLevel = 3";
+            string query3 = "SELECT * FROM CLASS_ITEM WHERE classNum LIKE '030_'";
+            List<project> pj = (List<project>)db.Query<project>(query1);
+            List<depart> dp = (List<depart>)db.Query<depart>(query2);
+            List<partclass> pc = (List<partclass>)db.Query<partclass>(query3);
+            workOrderModel model = new workOrderModel() { pj = pj, dp = dp, pc = pc };
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        //选择零件
+        public JsonResult PartSelect(long id)
+        {
+            CheckConnect();
+            string query = "SELECT * FROM MAINTAIN_PART WHERE classID = @Id";
+            List<part> p = (List<part>)db.Query<part>(query, new { Id = id });
+            return Json(p, JsonRequestBehavior.AllowGet);
+        }
         public void CheckConnect()
         {
             if (db.State == ConnectionState.Open) db.Close();

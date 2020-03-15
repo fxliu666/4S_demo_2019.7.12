@@ -103,6 +103,7 @@
     <Compile Include="Entities\project.cs" />
     <Compile Include="Entities\staff.cs" />
     <Compile Include="Entities\staffInfoModel.cs" />
+    <Compile Include="Entities\workOrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
