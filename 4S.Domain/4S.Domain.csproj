@@ -97,10 +97,13 @@
     <Compile Include="Entities\customerCar.cs" />
     <Compile Include="Entities\depart.cs" />
     <Compile Include="Entities\maintainOrder.cs" />
+    <Compile Include="Entities\maintainOrderModel.cs" />
     <Compile Include="Entities\part.cs" />
     <Compile Include="Entities\partclass.cs" />
+    <Compile Include="Entities\partJsonModel.cs" />
     <Compile Include="Entities\position.cs" />
     <Compile Include="Entities\project.cs" />
+    <Compile Include="Entities\projectJsonModel.cs" />
     <Compile Include="Entities\staff.cs" />
     <Compile Include="Entities\staffInfoModel.cs" />
     <Compile Include="Entities\workOrderModel.cs" />

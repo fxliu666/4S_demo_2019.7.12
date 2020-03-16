@@ -212,6 +212,7 @@ namespace _4S.WebUI.Controllers
         //级联加载零件类别
         public JsonResult ClassSelect(string num)
         {
+            CheckConnect();
             string query = "SELECT * FROM CLASS_ITEM WHERE parentNum = @Num";
             List<partclass> classes = (List<partclass>)db.Query<partclass>(query, new { Num = num });
             return Json(classes, JsonRequestBehavior.AllowGet);

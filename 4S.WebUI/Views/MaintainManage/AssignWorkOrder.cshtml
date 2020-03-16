@@ -19,73 +19,46 @@
 
                         <form class="layui-form layui-form-pane" action="">
                             <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">工单号</label>
-
-
-                                    <input id="type" type="text" list="typelist" placeholder="请选择">
-                                    <datalist id="typelist">
-                                        <option>Dimond</option>
-                                        <option>vertical</option>
-                                    </datalist>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">预约单号</label>
-
-
-                                    <input id="type" type="text" list="typelist" placeholder="请选择">
-                                    <datalist id="typelist">
-                                        <option>Dimond</option>
-                                        <option>vertical</option>
-                                    </datalist>
-
-
-                                    <div class="layui-input-inline">
-                                        <select name="quiz" lay-search="" id="load">
-                                            <option value="">请选择问题</option>
-                                            <optgroup label="城市记忆">
-                                                <option value="你工作的第一个城市">你工作的第一个城市</option>
-                                            </optgroup>
-                                            <optgroup label="学生时代">
-                                                <option value="你的工号">你的工号</option>
-                                                <option value="你最喜欢的老师">你最喜欢的老师</option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">客户姓名:</label>
+                                <label class="layui-form-label">工单号</label>
                                 <div class="layui-input-inline">
-                                    <input id="name" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    <input id="maintainOrderNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">预约单号</label>
+                                <div class="layui-input-inline">
+                                    <input id="appointOrderNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">车辆编号</label>
+                                <div class="layui-input-inline">
+                                    <input id="carNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">客户姓名</label>
+                                <div class="layui-input-inline">
+                                    <input id="cusName" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">手机号</label>
                                 <div class="layui-input-inline">
-                                    <input id="partname" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    <input id="phone" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">车辆编号:</label>
+                                <label class="layui-form-label">创建时间</label>
                                 <div class="layui-input-inline">
-                                    <input id="partname" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                </div>
-
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">创建时间:</label>
-                                <div class="layui-input-inline">
-                                    <input id="partname" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    <input id="createTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                 </div>
 
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">创建员工:</label>
+                                <label class="layui-form-label">创建员工</label>
                                 <div class="layui-input-inline">
-                                    <input id="partname" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    <input id="createStaff" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                 </div>
 
                             </div>
@@ -98,11 +71,35 @@
                             <div class="layui-form-item layui-form-text">
                                 <label class="layui-form-label">预计项目</label>
                                 <div class="layui-input-block">
-                                    <textarea placeholder="请输入内容" class="layui-textarea" id="descript"></textarea>
+                                    <textarea placeholder="请输入内容" class="layui-textarea" id="expectedPj"></textarea>
                                 </div>
                             </div>
-                            <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="添加项目" onclick="addProject()" />
-                            <input value="0" type="hidden" id="isorigin" />
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">预计价格</label>
+                                <div class="layui-input-inline">
+                                    <input id="expectedPrice" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">预计时间</label>
+                                <div class="layui-input-inline">
+                                    <input id="expectedTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+
+                                <div class="layui-inline settime">
+                                    <label class="layui-form-label">完成时间</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input ordertime" placeholder="yyyy-MM-dd HH:mm:ss">
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="添加项目" id="addPJ" />
+                            <input value="0" type="hidden" id="orderId" />
                         </form>
 
                     </div>
@@ -119,12 +116,13 @@
                 <div class="project" style="display:none;">
 
                     <div class="layui-col-md9 PJitem">
+
                         <div class="layui-card">
                             <div class="layui-card-header">
                                 <span>添加项目</span>
                                 <button type="button" style="right:25px;" onclick="deleteProject(this)"><i class="layui-icon"></i></button>
-                                
-               
+
+
                             </div>
                             <div class="layui-card-body">
 
@@ -134,7 +132,7 @@
                                         <label class="layui-form-label" style="width:114px">维修项目</label>
                                         <div class="layui-input-inline">
                                             <select name="modules" lay-verify="required" lay-search="" class="pjselect">
-                                                <option value="">直接选择或搜索选择</option>             
+                                                <option value="">直接选择或搜索选择</option>
                                             </select>
                                         </div>
 
@@ -156,10 +154,17 @@
 
 
                                     </div>
+                                    <div class="layui-inline settime">
 
+                                    </div>
 
 
                                 </div>
+
+                                    
+
+
+
                                 <div class="layui-form-item">
                                     <div class="layui-inline">
                                         <label class="layui-form-label" style="width:114px">维修零件</label>
@@ -178,7 +183,7 @@
                                                 <option value="">直接选择或搜索选择</option>
                                             </select>
                                         </div>
-                                        
+
 
                                     </div>
 
@@ -200,11 +205,11 @@
 
                                     <div class="part" style="display:none;">
                                         <div class="Pitem" style="margin: 5px 10px 5px 40px;">
-                                            <input class="pid" value="0" type="hidden"/>
+                                            <input class="pid" value="0" type="hidden" />
                                             <label class="pname" style="padding: 10px 10px;">名称</label>
                                             <label class="pnum" style="position: absolute;left: 260px;margin-top: 10px;">数量</label>
                                             <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" style="position: absolute;left: 300px;margin-top: 7px;" onclick="deletePart(this)"><i class="layui-icon"></i></button>
-             
+
                                         </div>
                                     </div>
                                 </div>
@@ -214,11 +219,13 @@
 
                             </div>
                         </div>
+
                     </div>
 
                 </div>
             </div>
         </form>
+        
             </div>
 
     
@@ -227,7 +234,7 @@
 <button onclick="numeric()">数量</button>
         <div style="margin-top: 20px;">
             <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
-                <input type="submit" class="layui-btn layui-btn-radius layui-btn-normal" value="确定" onclick="check()" />
+                <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="派工" onclick="check()" />
                 &nbsp;&nbsp;&nbsp;
                 <input type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="返回" onclick="goback()" />
             </div>
@@ -236,13 +243,15 @@
     function render() {
         layui.use('form', function () {
             var form = layui.form;
+    
             form.render();
         });
     }
+ 
 
-    layui.use(['laydate','form'], function () {
-        var laydate = layui.laydate;
+    layui.use(['form','laydate'], function () {
         var form = layui.form;
+        var laydate = layui.laydate;
         form.on('select(pselect1)', function (data) {
             var item = data.elem;
             $.post('/DepartManage/ClassSelect', { num: data.value }, function (res) {
@@ -251,6 +260,7 @@
                     htmls += '<option value = "' + res[x].classID + '">' + res[x].className + '</option>';
                 }
                 $(item).parent().parent().find(".pselect2").html(htmls);
+                $(item).parent().parent().find(".pselect3").html("");
                 
                 render();
 
@@ -270,19 +280,32 @@
                 render();
             })
         });
-        form.on('radio(isorigin)', function (data) {
-            $("#isorigin").val(data.value);
-            console.log($("#isorigin").val());
+
+        function setTime(){
+            $('.ordertime').each(function(){
+                laydate.render({
+                    elem:this,
+                    trigger:"click",
+                    type:'datetime',
+                    format:'yyyy/M/d H:m:s'
+                });
+            });
+        }
+        setTime();
+        $("#addPJ").click(function(){
+            var time = "<label class='layui-form-label' style='width:114px;'>完成时间</label>"+
+                                        "<div class='layui-input-inline'>"+
+                                            "<input type='text' class='layui-input ordertime' placeholder='yyyy-MM-dd HH:mm:ss'>"+
+                                        "</div>"
+            var content = $('.project').html();
+            $('.projects').append(content);
+            $('.projects').find('.settime').last().append(time);
+            form.render();
+            setTime();
         })
 
 
-
-        //常规用法
-        laydate.render({
-            elem: '#ordertime',
-            type: 'datetime',
-            format: 'yyyy/M/d H:m:s'
-        });
+ 
     });
 
 </script>
@@ -295,6 +318,7 @@
                 console.log("e");
             });
             function addProject() {
+  
                 var content = $('.project').html();
                 $('.projects').append(content);
                 render();
@@ -335,10 +359,11 @@
             loadData();
 
             function loadData() {
-                $.post('/MaintainManage/LoadWorkOrder', {}, function (res) {
-                    var project = res.pj;
-                    var depart = res.dp;
-                    var partclass = res.pc;
+                
+                $.post('/MaintainManage/LoadWorkOrder', {id : @ViewBag.id}, function (res) {
+                    var project = res.model.pj;
+                    var depart = res.model.dp;
+                    var partclass = res.model.pc;
                     var htmls1 = "";
                     var htmls2 = "";
                     var htmls3 = "";
@@ -354,6 +379,19 @@
                     $(".project:hidden").find(".pjselect").html(htmls1);
                     $(".project:hidden").find(".dpselect").html(htmls2);
                     $(".project:hidden").find(".pselect1").html(htmls3);
+                    
+                    $("#orderId").val(res.maintainOrderID);
+                    $("#maintainOrderNum").val(res.maintainOrderNum);
+                    $("#appointOrderNum").val(res.appointOrderNum);
+                    $("#carNum").val(res.carNum);
+                    $("#cusName").val(res.customerName);
+                    $("#phone").val(res.customerPhone);
+                    $("#createTime").val(res.createTime);
+                    $("#createStaff").val(res.createStaff);
+                    $("#descript").val(res.faultDescript);
+                    $("#expectedPj").val(res.expectedPj);
+                    $("#expectedPrice").val(res.expectedPrice);
+                    $("#expectedTime").val(res.expectedTime);
                     render();
                 });
 
@@ -364,10 +402,29 @@
             }
 
             function check() {
-                $.post('/DepartManage/AddPartResult', {
-                    partName: $('#partname').val(), isOrigin: $('#isorigin').val(), id:
-                                                        $('#class2').find("option:selected").val(), qualification: $('#descript').val()
+                var projects = new Array();
+                $(".projects").children(".PJitem").each(function(){
+                    var i = $(this).index()-1;
+                    var project = new Object();
+                    var parts = new Array();
+                    project.pjId = $(this).find(".pjselect").val();
+                    project.dpId = $(this).find(".dpselect").val();
+                    project.time = $(this).find(".ordertime").val();
+                    $(this).find(".parts").children(".Pitem").each(function(){
+                        var index = $(this).index()-1;
+                        var Id = $(this).find(".pid").val();
+                        var Amount = $(this).find(".pnum").text();
+                        var part = {partId: Id, amount:Amount};
+                        parts[index] = part;
+                    });
+                    project.parts = parts;
+                    projects[i] = project;
+
+                });
+                var order = JSON.stringify(projects);
+                $.post('/maintainManage/AddWorkOrderResult', { orders: order, id : $("#orderId").val()
                 }, function (res) {
+                    console.log(res);
                     if (res == 1) {
                         setTimeout(function () {
                             layer.msg("添加成功！");
