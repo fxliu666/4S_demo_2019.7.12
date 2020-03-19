@@ -20,40 +20,47 @@ namespace _4S.WebUI.Controllers
             return View();
         }
         // GET: MaintainManage
-        public ActionResult WorkorderIndex()
-        {
-            return View();
-        }
-        
+
+
         public JsonResult LoadOrders(int page = 1, int limit = 10, int code = 0)
         {
             CheckConnect();
-            table<maintainOrder> data = new table<maintainOrder>();
+            table<maintainOrderTableModel> data = new table<maintainOrderTableModel>();
             string query;
-            int count = 1000;
-            string querycount = "select * from MAINTAIN_ORDER";
-            count = db.Query<maintainOrder>(querycount).Count();
-            List<maintainOrder> orders;
+            string querycount = "SELECT COUNT(1) FROM MAINTAIN_ORDER";
+            int count = db.Query<int>(querycount).SingleOrDefault();
+            List<maintainOrderTableModel> orders;
             if (code == 0)
             {
-                query = "select * from MAINTAIN_ORDER limit " + ((page - 1) * limit).ToString() + "," + limit.ToString();
-                orders = (List<maintainOrder>)db.Query<maintainOrder>(query);
-            }
-            else if (code == 1)
-            {
-                query = "select * from MAINTAIN_ORDER where appointOrderState = 1 limit " + ((page - 1) * limit).ToString() + "," + limit.ToString();
-                orders = (List<maintainOrder>)db.Query<maintainOrder>(query);
-            }
-            else if (code == 2)
-            {
-                query = "select * from MAINTAIN_ORDER where appointOrderState = 2 limit " + ((page - 1) * limit).ToString() + "," + limit.ToString();
-                orders = (List<maintainOrder>)db.Query<maintainOrder>(query);
+                query = "SELECT M.maintainOrderID as maintainOrderID,M.maintainOrderNum as maintainOrderNum,"+
+                        "A.appointOrderNum as appointOrderNum,C.customerCarNum as customerCarNum,"+
+                        "S.staffNum as createstaffNum,M.createTime as createTime,M.orderState as orderState"+
+                        " FROM MAINTAIN_ORDER AS M"+
+                        " LEFT JOIN APPOINT_ORDER AS A"+
+                        " ON M.maintainAppointID = A.appointOrderID"+
+                        " INNER JOIN CUSTOMER_CAR_BASE AS C"+
+                        " ON M.customerCarID = C.customerCarID"+
+                        " INNER JOIN STAFF_BASE AS S"+
+                        " ON M.createStaffID = S.staffID"+
+                        " LIMIT "+ ((page - 1) * limit).ToString() + "," + limit.ToString();
+                
             }
             else
             {
-                query = "select * from MAINTAIN_ORDER where appointOrderState = 3 limit " + ((page - 1) * limit).ToString() + "," + limit.ToString();
-                orders = (List<maintainOrder>)db.Query<maintainOrder>(query);
+                query = "SELECT M.maintainOrderID as maintainOrderID,M.maintainOrderNum as maintainOrderNum," +
+                        "A.appointOrderNum as appointOrderNum,C.customerCarNum as customerCarNum," +
+                        "S.staffNum as createstaffNum,M.createTime as createTime,M.orderState as orderState" +
+                        " FROM MAINTAIN_ORDER AS M" +
+                        " INNER JOIN APPOINT_ORDER AS A" +
+                        " ON M.maintainAppointID = A.appointOrderID" +
+                        " INNER JOIN CUSTOMER_CAR_BASE AS C" +
+                        " ON M.customerCarID = C.customerCarID" +
+                        " INNER JOIN STAFF_BASE AS S" +
+                        " ON M.createStaffID = S.staffID" +
+                        " WHERE M.orderState == " + code.ToString()+
+                        " LIMIT " + ((page - 1) * limit).ToString() + "," + limit.ToString();
             }
+            orders = (List<maintainOrderTableModel>)db.Query<maintainOrderTableModel>(query);
             data.data = orders;
             data.count = count;
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -149,11 +156,11 @@ namespace _4S.WebUI.Controllers
             List<project> pj = (List<project>)db.Query<project>(query1);
             List<depart> dp = (List<depart>)db.Query<depart>(query2);
             List<partclass> pc = (List<partclass>)db.Query<partclass>(query3);
-            maintainOrder order = db.Query<maintainOrder>(query4,new { Id = id}).SingleOrDefault();
-            string carNum = db.Query<string>(query5,new { Id = order.customerCarID}).SingleOrDefault();
+            maintainOrder order = db.Query<maintainOrder>(query4, new { Id = id }).SingleOrDefault();
+            string carNum = db.Query<string>(query5, new { Id = order.customerCarID }).SingleOrDefault();
             long customerId = db.Query<long>(query6, new { Id = order.customerCarID }).SingleOrDefault();
-            string customerName = db.Query<string>(query7,new { Id = customerId }).SingleOrDefault();
-            string phone = db.Query<string>(query8,new { Id = customerId }).SingleOrDefault();
+            string customerName = db.Query<string>(query7, new { Id = customerId }).SingleOrDefault();
+            string phone = db.Query<string>(query8, new { Id = customerId }).SingleOrDefault();
             string staffNum = db.Query<string>(query9, new { Id = order.createStaffID }).SingleOrDefault();
             workOrderModel model = new workOrderModel() { pj = pj, dp = dp, pc = pc };
             maintainOrderModel order_model = new maintainOrderModel()
@@ -185,19 +192,19 @@ namespace _4S.WebUI.Controllers
         }
 
         //派工结果
-        public JsonResult AddWorkOrderResult(string orders,long id)
+        public JsonResult AddWorkOrderResult(string orders, long id)
         {
             CheckConnect();
             int year1 = DateTime.Now.Year;
             int month1 = DateTime.Now.Month;
             int day1 = DateTime.Now.Day;
-            string year2="", month2="", day2="";
+            string year2 = "", month2 = "", day2 = "";
             if (month1 < 10) {
                 month2 += "0";
             }
             month2 += month1.ToString();
 
-            if(day1 < 10)
+            if (day1 < 10)
             {
                 day2 += "0";
             }
@@ -227,8 +234,8 @@ namespace _4S.WebUI.Controllers
             {
                 string num = "";
                 last += 1;
-                if(last < 10) num += "00";
-                else if(last < 100) num += "0";
+                if (last < 10) num += "00";
+                else if (last < 100) num += "0";
                 num += last.ToString();
                 result = db.Execute(sql1, new
                 {
@@ -240,14 +247,187 @@ namespace _4S.WebUI.Controllers
                     Actualtime = DateTime.Now.ToString(),
                     Assigntime = DateTime.Now.ToString()
                 });
-                woId = db.Query<long>(query2,new { Num = (pre + num) }).SingleOrDefault();
-                foreach(partJsonModel part in item.parts)
+                woId = db.Query<long>(query2, new { Num = (pre + num) }).SingleOrDefault();
+                foreach (partJsonModel part in item.parts)
                 {
                     result = db.Execute(sql2, new { WId = woId, PId = part.partId, PQ = part.amount, Exid = 0 });
                 }
             }
-        
+            string set = "UPDATE MAINTAIN_ORDER SET orderState = 2 WHERE maintainOrderID = @Id";
+            result = db.Execute(set, new { Id = id });
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        //派工单管理
+        public ViewResult WorkorderIndex()
+        {
+            return View();
+        }
+
+        //加载派工单
+        public JsonResult LoadWorkOrders(int page = 1, int limit = 10, int code = 0)
+        {
+            CheckConnect();
+            table<workOrderTableModel> data = new table<workOrderTableModel>();
+            string query;
+            int count = 1000;
+            string querycount = "SELECT COUNT(*) FROM WORK_ORDER";
+            count = db.Query<int>(querycount).SingleOrDefault();
+            List<workOrderTableModel> orders;
+            if (code == 0)
+            {
+                query = "SELECT W.workOrderID as workOrderID,W.workOrderNum as workOrderNum,"+
+                        "M.maintainOrderNum as maintainOrderNum,D.departNum as departNum,"+
+                        "W.expectedTime as expectedTime,W.assignTime as assignTime,"+
+                        "W.workOrderState as workOrderState"+
+                        " FROM WORK_ORDER as W"+
+                        " INNER JOIN MAINTAIN_ORDER AS M"+
+                        " ON W.maintainOrderID = M.maintainOrderID"+
+                        " INNER JOIN DEPART_BASE AS D"+
+                        " ON W.departID = D.departID"+
+                        " LIMIT " + 
+                        ((page - 1) * limit).ToString() + "," + limit.ToString();
+                
+            }
+            else
+            {
+                query = "SELECT W.workOrderID as workOrderID,W.workOrderNum as workOrderNum," +
+                       "M.maintainOrderNum as maintainOrderNum,D.departNum as departNum," +
+                       "W.expectedTime as expectedTime,W.assignTime as assignTime," +
+                       "W.workOrderState as workOrderState" +
+                       " FROM WORK_ORDER as W" +
+                       " INNER JOIN MAINTAIN_ORDER AS M" +
+                       " ON W.maintainOrderID = M.maintainOrderID" +
+                       " INNER JOIN DEPART_BASE AS D" +
+                       " ON W.departID = D.departID" +
+                       " WHERE W.workOrderState = "+
+                       code.ToString()+
+                       " LIMIT " +
+                       ((page - 1) * limit).ToString() + "," + limit.ToString();
+            }
+            orders = (List<workOrderTableModel>)db.Query<workOrderTableModel>(query);
+            data.data = orders;
+            data.count = count;
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        //编辑派工单
+        public ViewResult EditWorkorder(long id)
+        {
+            ViewBag.id = id;
+            return View(ViewBag.id);
+        }
+
+        //加载要编辑的派工单信息
+        public JsonResult LoadEditWorkOrder(long id)
+        {
+            string query = "SELECT W.workOrderID as workOrderID,W.workOrderNum as workOrderNum," +
+                   "M.maintainOrderNum as maintainOrderNum,D.departNum as departNum,PJ.projectName as maintainProjectName," +
+                   "W.expectedTime as expectedTime,W.actualTime as actualTime,W.assignTime as assignTime," +
+                   "PJ.workTime as exWorkTime,W.workTime as acWorkTime,W.workOrderState as workOrderState" +
+                   " FROM WORK_ORDER as W" +
+                   " INNER JOIN MAINTAIN_ORDER AS M" +
+                   " ON W.maintainOrderID = M.maintainOrderID" +
+                   " INNER JOIN DEPART_BASE AS D" +
+                   " ON W.departID = D.departID" +
+                   " INNER JOIN MAINTAIN_PROJECT AS PJ"+
+                   " ON W.maintainProjectID = PJ.projectID"+
+                   " WHERE W.workOrderID = @Id";
+            workOrderEditModel model = db.Query<workOrderEditModel>(query, new { Id = id }).SingleOrDefault();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        //编辑派工单结果
+        public JsonResult EditWorkOrderResult(string finishTime,float workTime,string staff,int state,long id)
+        {
+            string sql = "UPDATE WORK_ORDER SET actualTime = @FinishTime, workTime = @WorkTime, maintainStaff = @Staff, " +
+                        "workOrderState = @State WHERE workOrderID = @Id";
+            int result = db.Execute(sql, new
+            {
+                FinishTime = finishTime,
+                WorkTime = workTime,
+                Staff = staff,
+                State = state,
+                Id = id
+            });
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+        //打印零件领取单
+        public ViewResult PrintOrder(long id)
+        {
+            ViewBag.id = id;
+            return View(ViewBag.id);
+        }
+
+        //要打印的零件领取单
+        public JsonResult Order2Print(long id, int code = 0)
+        {
+            CheckConnect();
+            string query = "SELECT PR.partReceiveID as partReceiveID,W.workOrderNum as workOrderNum,P.partNum as partNum,PR.partQuantity as partQuantity,PR.partEXID as partEXID" +
+                           " FROM PART_RECEIVE AS PR" +
+                           " INNER JOIN WORK_ORDER AS W" +
+                           " ON PR.workOrderID = W.workOrderID" +
+                           " INNER JOIN MAINTAIN_PART AS P" +
+                           " ON PR.partID = P.partID" +
+                           " WHERE PR.workOrderID = @Id";
+            int count = 0;
+            table<partReceive> data = new table<partReceive>();
+            List<partReceive> parts = (List<partReceive>)db.Query<partReceive>(query, new { Id = id });
+            count = parts.Count();
+            data.data = parts;
+            data.count = count;
+            return Json(data, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+        //工单结算
+        public ViewResult SettleOrder(long id)
+        {
+            ViewBag.id = id;
+            return View(ViewBag.id);
+        }
+
+        //加载结算单信息
+        public JsonResult LoadSettleOrder(long id)
+        {
+            CheckConnect();
+            settleOrderModel model = new settleOrderModel();
+            string query = "SELECT * FROM MAINTAIN_ORDER WHERE maintainOrderID = @Id";
+            maintainOrder Morder = db.Query<maintainOrder>(query, new { Id = id }).SingleOrDefault();
+            string query2 = "SELECT * FROM CUSTOMER_CAR_BASE WHERE customerCarID = @Id";
+            customerCar Car = db.Query<customerCar>(query2, new { Id = Morder.customerCarID }).SingleOrDefault();
+            string query3 = "SELECT * FROM CUSTOMER WHERE customerID = @Id";
+            Customer Cus = db.Query<Customer>(query3, new { Id = Car.customerID }).SingleOrDefault();
+            model.customerName = Cus.customerName;
+            model.phone = Cus.customerPhone;
+            model.address = Cus.customerAddress;
+            model.carBrand = Car.carBrand;
+            model.carType = Car.carType;
+            model.engineNum = Car.engineNum;
+            model.licenseNum = Car.licenseNum;
+            model.startTime = Morder.createTime;
+            model.finishTime = Morder.finishTime;
+            string query4 = "SELECT W.workOrderID as workOrderID,PJ.projectName as projectName,W.workTime as workTime,D.departNum as departNum" +
+                            " FROM WORK_ORDER AS W" +
+                            " INNER JOIN MAINTAIN_PROJECT AS PJ" +
+                            " ON W.maintainProjectID = PJ.projectID" +
+                            " INNER JOIN DEPART_BASE AS D" +
+                            " ON W.departID = D.departID" +
+                            " WHERE W.maintainOrderID = @Id";
+            List<workOrderSettleModel> Wmodel = (List<workOrderSettleModel>)db.Query<workOrderSettleModel>(query4, new { Id = id });
+            foreach(workOrderSettleModel item in Wmodel)
+            {
+                string q = "SELECT MP.partName AS partName,P.partQuantity AS partAmount,MP.partPrice* P.partQuantity AS partPrice" +
+                           " FROM PART_RECEIVE AS P" +
+                           " INNER JOIN MAINTAIN_PART AS MP" +
+                           " ON P.partID = MP.partID" +
+                           " WHERE P.workOrderID = @Id";
+                List<partSettleModel> parts = (List<partSettleModel>)db.Query<partSettleModel>(q, new { Id = item.workOrderID });
+                item.parts = parts;
+            }
+            model.orders = Wmodel;
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         public void CheckConnect()
         {

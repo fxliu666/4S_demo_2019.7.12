@@ -40,29 +40,30 @@
             </div>
         </div>
         <div class="layui-card-body">
-            <table id="tabledemo" lay-filter="LAY-app-system-order"></table>
+            <table id="tabledemo" lay-filter="tabledemo"></table>
             <script type="text/html" id="progressTpl">
-                <div class="layui-progress layuiadmin-order-progress" lay-filter="progress-" + {{ d.maintainOrderID }} +"">
-                    <div class="layui-progress-bar layui-bg-blue" lay-percent= {{ (d.orderState/4.0)*100 + "%" }}></div>
+                <div class="layui-progress layuiadmin-order-progress" lay-filter="progress-" + {{ d.workOrderID }} +"">
+                    <div class="layui-progress-bar layui-bg-blue" lay-percent= {{ (d.workOrderState/3.0)*100 + "%" }}></div>
                 </div>
             </script>
             <script type="text/html" id="buttonTpl">
-                {{#  if(d.orderState == 1){ }}
-                <button class="layui-btn layui-btn-primary layui-btn-xs">待派工</button>
-                {{#  } else if(d.orderState == 2){ }}
+                {{#  if(d.workOrderState == 1){ }}
+                <button class="layui-btn layui-btn-primary layui-btn-xs">待领件</button>
+                {{#  } else if(d.workOrderState == 2){ }}
                 <button class="layui-btn layui-btn-warm layui-btn-xs">维修中</button>
-                {{#  } else if(d.orderState == 3){ }}
-                <button class="layui-btn layui-btn-xs">待缴费</button>
-                {{#  } else if(d.orderState == 4){ }}
+                {{#  } else if(d.workOrderState == 3){ }}
                 <button class="layui-btn layui-btn-normal layui-btn-xs">已完成</button>
                 {{#  } }}
             </script>
             <script type="text/html" id="barDemo">
-                {{# if(d.orderState == 1){ }}
-                <a class="layui-btn layui-btn-xs" lay-event="check">派工</a>
+                {{# if(d.workOrderState == 1){ }}
+                <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-xs" lay-event="print">打印领取单</a>
+                {{# } else if(d.workOrderState == 2){ }}
+                <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
                 {{# } else{ }}
                 <a class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
-                <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
                 {{# } }}
             </script>
             <script type="text/html" id="table-system-order">
@@ -82,25 +83,25 @@
             table.render({
                 elem: '#tabledemo'
                 , method: 'post'
-                , url: '/MaintainManage/LoadOrders'
+                , url: '/MaintainManage/LoadWorkOrders'
                 ,where:{code:m}
 
                 , toolbar: '#toolbarDemo'
-                , title: '预约单表'
+                , title: '派工单'
                 , totalRow: true
 
 
             , cols: [[ //标题栏
-                { field: 'maintainOrderID', title: '维保工单ID', hide: true },
-                { field: 'maintainOrderNum', width: 80, type: 'numbers', fixed: 'left', align: 'center' },
-                { field: 'maintainOrderNum', title: '维保工单号', width: 150, align: 'center' },
-                { field: 'maintainAppointID', title: '预约单id', width: 80, sort: 'true', align: 'center' },
-                { field: 'customerCarID', title: '客户车辆id', width: 80, align: 'center' },
-                { field: 'createStaffID', title: '创建员工id', width: 80, align: 'center' },
-                { field: 'createTime', title: '创建时间', width: 170, align: 'center' },
-                { field: 'process', title: '进度', templet: '#progressTpl', width: 200, align: 'center' },
-                { field: 'orderState', title: '工单状态', templet: '#buttonTpl', unresize: true, width: 200, align: 'center' },
-                { field: 'right', title: '操作', toolbar: '#barDemo', width: 180, fixed: 'right', align: 'center' }
+                { field: 'workOrderID', title: '派工单ID', hide: true },
+                { field: 'workOrderNum', width: 80, type: 'numbers', fixed: 'left', align: 'center' },
+                { field: 'workOrderNum', title: '派工单号', width: 150, align: 'center' },
+                { field: 'maintainOrderNum', title: '维保工单号', width: 150, sort: 'true', align: 'center' },
+                { field: 'departNum', title: '维保小组', width: 100, align: 'center' },
+                { field: 'expectedTime', title: '预计完成时间', width: 150, align: 'center' },
+                { field: 'assignTime', title: '派工时间', width: 150, align: 'center' },
+                { field: 'process', title: '进度', templet: '#progressTpl', width: 170, align: 'center' },
+                { field: 'workOrderState', title: '派工单状态', templet: '#buttonTpl', unresize: true, width: 120, align: 'center' },
+                { field: 'right', title: '操作', toolbar: '#barDemo', width: 150, fixed: 'right', align: 'center' }
 
             ]]
                 , done: function (res, curr, count) {
@@ -130,6 +131,9 @@
                 if (layEvent === 'detail') { //查看
                     layer.msg(data.appointOrderID);
                     window.location.href = "/AppointManage/OrderDetail?id=" + data.appointOrderID;
+                } else if (layEvent === 'edit') {
+                    layer.msg(data.workOrderNum);
+                    window.location.href = "/MaintainManage/EditWorkorder?id=" + data.workOrderID;
                 } else if (layEvent === 'delete') { //删除
                     console.log(data);
                     console.log(data.customerID);
@@ -140,10 +144,10 @@
                         layer.close(index);
 
                     });
-                } else if (layEvent === 'check') { //编辑
+                } else if (layEvent === 'print') { //打印
                     //do something
-                    layer.msg(data.appointOrderID);
-                    window.location.href = "/AppointManage/CheckOrder?id=" + data.appointOrderID;
+                    layer.msg(data.workOrderID);
+                    window.location.href = "/MaintainManage/PrintOrder?id=" + data.workOrderID;
                     //同步更新缓存对应的值
                     obj.update({
                         username: '123'

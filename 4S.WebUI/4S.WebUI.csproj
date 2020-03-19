@@ -1153,6 +1153,9 @@
     <Content Include="Views\DepartManage\AddPart.cshtml" />
     <Content Include="Views\MaintainManage\AddMaintainOrder.cshtml" />
     <Content Include="Views\MaintainManage\AssignWorkOrder.cshtml" />
+    <Content Include="Views\MaintainManage\PrintOrder.cshtml" />
+    <Content Include="Views\MaintainManage\SettleOrder.cshtml" />
+    <Content Include="Views\MaintainManage\EditWorkorder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

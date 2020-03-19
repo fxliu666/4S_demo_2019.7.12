@@ -181,14 +181,14 @@
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
-                                <a lay-href="/UserManage/UserManageIndex" href="/UserManage/UserManageIndex" id="queryUser">查询用户</a>
+                                <a lay-href="/UserManage/UserManageIndex" href="/UserManage/UserManageIndex" id="queryUser">用户管理</a>
                                
                             </dd>
                             <dd>
                                 @Html.ActionLink("添加用户", "AddUser", "UserManage")
                             </dd>
                             <dd>
-                                <a lay-href="user/administrators/role.html">角色管理</a>
+                                <a lay-href="user/administrators/role.html">车辆管理</a>
                             </dd>
                         </dl>
                     </li>
@@ -216,13 +216,16 @@
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
-                                @Html.ActionLink("查询工单", "MaintainorderIndex", "MaintainManage")
+                                @Html.ActionLink("预约管理", "AppointorderIndex", "AppointManage")
                             </dd>
                             <dd>
-                                @Html.ActionLink("新建工单", "AddMaintainOrder", "MaintainManage")
+                                @Html.ActionLink("维保工单管理", "MaintainorderIndex", "MaintainManage")
                             </dd>
                             <dd>
-                                <a lay-href="user/administrators/role.html">角色管理</a>
+                                @Html.ActionLink("派工管理", "WorkorderIndex", "MaintainManage")
+                            </dd>
+                            <dd>
+                                @Html.ActionLink("结算管理", "WorkorderIndex", "MaintainManage")
                             </dd>
                         </dl>
                     </li>
@@ -233,25 +236,25 @@
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
-                                @Html.ActionLink("查询部门", "DepartManageIndex", "DepartManage")
+                                @Html.ActionLink("部门管理", "DepartManageIndex", "DepartManage")
                             </dd>
                             <dd>
                                 @Html.ActionLink("新建部门", "AddDepart", "DepartManage")
                             </dd>
                             <dd>
-                                @Html.ActionLink("查询员工", "StaffManageIndex", "DepartManage")
+                                @Html.ActionLink("员工管理", "StaffManageIndex", "DepartManage")
                             </dd>
                             <dd>
                                 @Html.ActionLink("新建员工", "AddStaff", "DepartManage")
                             </dd>
                             <dd>
-                                @Html.ActionLink("查询零件材料", "PartManageIndex", "DepartManage")
+                                @Html.ActionLink("零件材料管理", "PartManageIndex", "DepartManage")
                             </dd>
                             <dd>
                                 @Html.ActionLink("新建零件材料", "AddPart", "DepartManage")
                             </dd>
                             <dd>
-                                @Html.ActionLink("查询维保项目", "ProjectManageIndex", "DepartManage")
+                                @Html.ActionLink("维保项目管理", "ProjectManageIndex", "DepartManage")
                             </dd>
                             <dd>
                                 @Html.ActionLink("新建维保项目", "AddProject", "DepartManage")

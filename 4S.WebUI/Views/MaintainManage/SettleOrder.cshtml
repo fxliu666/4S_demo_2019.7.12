@@ -1,17 +1,16 @@
 ﻿
 @{
-    ViewBag.Title = "AssignWorkOrder";
+    ViewBag.Title = "SettleOrder";
     Layout = "~/Views/Shared/_LayouthomePage.cshtml";
 }
-
 
 <div class="layui-fluid">
 
     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
-        <legend>工单派工</legend>
+        <legend>工单结算</legend>
     </fieldset>
     <div style="padding: 20px; background-color: #F2F2F2;">
-        <div class="layui-row layui-col-space15" id="total">
+        <div class="layui-row layui-col-space15" id="content">
             <div class="layui-col-md12">
                 <div class="layui-card">
                     <div class="layui-card-header">工单信息</div>
@@ -19,86 +18,67 @@
 
                         <form class="layui-form layui-form-pane" action="">
                             <div class="layui-form-item">
-                                <label class="layui-form-label">工单号</label>
-                                <div class="layui-input-inline">
-                                    <input id="maintainOrderNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">预约单号</label>
-                                <div class="layui-input-inline">
-                                    <input id="appointOrderNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">车辆编号</label>
-                                <div class="layui-input-inline">
-                                    <input id="carNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">客户姓名</label>
-                                <div class="layui-input-inline">
-                                    <input id="cusName" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">手机号</label>
-                                <div class="layui-input-inline">
-                                    <input id="phone" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">创建时间</label>
-                                <div class="layui-input-inline">
-                                    <input id="createTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                </div>
-
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">创建员工</label>
-                                <div class="layui-input-inline">
-                                    <input id="createStaff" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                </div>
-
-                            </div>
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">故障描述</label>
-                                <div class="layui-input-block">
-                                    <textarea placeholder="请输入内容" class="layui-textarea" id="descript"></textarea>
-                                </div>
-                            </div>
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">预计项目</label>
-                                <div class="layui-input-block">
-                                    <textarea placeholder="请输入内容" class="layui-textarea" id="expectedPj"></textarea>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">预计价格</label>
-                                <div class="layui-input-inline">
-                                    <input id="expectedPrice" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">预计时间</label>
-                                <div class="layui-input-inline">
-                                    <input id="expectedTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-
-                                <div class="layui-inline settime">
-                                    <label class="layui-form-label">完成时间</label>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">客户姓名</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" class="layui-input ordertime" placeholder="yyyy-MM-dd HH:mm:ss">
+                                        <input id="name" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
-
-
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">车牌号</label>
+                                    <div class="layui-input-inline">
+                                        <input id="licenseNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">联系电话</label>
+                                    <div class="layui-input-inline">
+                                        <input id="phone" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">维保开始时间</label>
+                                    <div class="layui-input-inline">
+                                        <input id="startTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">联系地址</label>
+                                    <div class="layui-input-inline">
+                                        <input id="address" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">维保完成时间</label>
+                                    <div class="layui-input-inline">
+                                        <input id="finishTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">车辆品牌</label>
+                                <div class="layui-input-inline">
+                                    <input id="carBrand" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">车辆型号</label>
+                                <div class="layui-input-inline">
+                                    <input id="carType" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">发动机号</label>
+                                <div class="layui-input-inline">
+                                    <input id="engineNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
 
                             </div>
-                            <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="添加项目" id="addPJ" />
+         
                             <input value="0" type="hidden" id="orderId" />
                         </form>
 
@@ -106,7 +86,7 @@
                 </div>
             </div>
 
-            
+
 
         </div>
         <form class="layui-form">
@@ -161,7 +141,7 @@
 
                                 </div>
 
-                                    
+
 
 
 
@@ -225,29 +205,29 @@
                 </div>
             </div>
         </form>
-        
-            </div>
 
-    
+    </div>
 
-        </div>
+
+
+</div>
 <button onclick="numeric()">数量</button>
-        <div style="margin-top: 20px;">
-            <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
-                <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="派工" onclick="check()" />
-                &nbsp;&nbsp;&nbsp;
-                <input type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="返回" onclick="goback()" />
-            </div>
-        </div>
+<div style="margin-top: 20px;">
+    <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+        <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="确定" onclick="check()" />
+        &nbsp;&nbsp;&nbsp;
+        <input type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="返回" onclick="goback()" />
+    </div>
+</div>
 <script>
     function render() {
         layui.use('form', function () {
             var form = layui.form;
-    
+
             form.render();
         });
     }
- 
+
 
     layui.use(['form','laydate'], function () {
         var form = layui.form;
@@ -261,7 +241,7 @@
                 }
                 $(item).parent().parent().find(".pselect2").html(htmls);
                 $(item).parent().parent().find(".pselect3").html("");
-                
+
                 render();
 
             });
@@ -305,28 +285,36 @@
         })
 
 
- 
+
     });
 
 </script>
-        <script>
+<script>
             function numeric() {
-                alert($('.PJitem').length);
+                //根据div标签ID拿到div中的局部内容
+                var bdhtml=window.document.body.innerHTML; 
+                var jubuData = $("#content").html();
+                //把获取的 局部div内容赋给body标签, 相当于重置了 body里的内容
+                window.document.body.innerHTML= jubuData; 
+                //调用打印功能
+                window.print();
+                window.document.body.innerHTML=bdhtml;//重新给页面内容赋值；
+                return false;
             }
-            
+
             $("#name").bind('input porpertychange', function () {
                 console.log("e");
             });
             function addProject() {
-  
+
                 var content = $('.project').html();
                 $('.projects').append(content);
                 render();
-               
-                
-                
+
+
+
             }
-         
+
             function deleteProject(obj) {
                 layer.confirm('确定删除吗?', { icon: 3, title: '提示' }, function (index) {
                     //do something
@@ -335,7 +323,7 @@
                     layer.close(index);
                     layer.msg(Index);
                 });
-                
+
             }
             function addPart(obj) {
                 var id = $(obj).parent().parent().prev().find('.pselect3').val();
@@ -344,7 +332,7 @@
                 $('.part').find('.pid').val(id);
                 $('.part').find('.pname').text(name);
                 $('.part').find('.pnum').text(num);
-                var content = $('.part').html();  
+                var content = $('.part').html();
                 $(obj).parent().parent().next().append(content);
                 render();
             }
@@ -359,37 +347,19 @@
             loadData();
 
             function loadData() {
-                
-                $.post('/MaintainManage/LoadWorkOrder', {id : @ViewBag.id}, function (res) {
-                    var project = res.model.pj;
-                    var depart = res.model.dp;
-                    var partclass = res.model.pc;
-                    var htmls1 = "";
-                    var htmls2 = "";
-                    var htmls3 = "";
-                    for (var x in project) {
-                        htmls1 += '<option value = "' + project[x].projectID + '">' + project[x].projectName + '</option>';
-                    }
-                    for (var x in depart) {
-                        htmls2 += '<option value = "' + depart[x].departID + '">' + depart[x].departName + '</option>';
-                    }
-                    for (var x in partclass) {
-                        htmls3 += '<option value = "' + partclass[x].classNum + '">' + partclass[x].className + '</option>';
-                    }
-                    $(".project:hidden").find(".pjselect").html(htmls1);
-                    $(".project:hidden").find(".dpselect").html(htmls2);
-                    $(".project:hidden").find(".pselect1").html(htmls3);
-                    
+
+                $.post('/MaintainManage/LoadSettleOrder', {id : @ViewBag.id}, function (res) {
+
                     $("#orderId").val(res.maintainOrderID);
-                    $("#maintainOrderNum").val(res.maintainOrderNum);
-                    $("#appointOrderNum").val(res.appointOrderNum);
-                    $("#carNum").val(res.carNum);
-                    $("#cusName").val(res.customerName);
-                    $("#phone").val(res.customerPhone);
-                    $("#createTime").val(res.createTime);
-                    $("#createStaff").val(res.createStaff);
-                    $("#descript").val(res.faultDescript);
-                    $("#expectedPj").val(res.expectedPj);
+                    $("#name").val(res.customerName);
+                    $("#phone").val(res.phone);
+                    $("#address").val(res.address);
+                    $("#carBrand").val(res.carBrand);
+                    $("#carType").val(res.carType);
+                    $("#engineNum").val(res.engineNum);
+                    $("#licenseNum").val(res.lincense);
+                    $("#startTime").val(res.startTime);
+                    $("#finishTime").val(res.finishTime);
                     $("#expectedPrice").val(res.expectedPrice);
                     $("#expectedTime").val(res.expectedTime);
                     render();
@@ -451,52 +421,4 @@
                 });
             }
 
-        </script>
-        <script>
-            var app = new Vue({
-                el: "#app",
-                data: {
-                    message: "Hello Vue!"
-                }
-            });
-            var app2 = new Vue({
-                el: '#app-2',
-                data: {
-                    message: "页面加载与" + new Date().toLocaleString()
-                }
-            });
-            var app3 = new Vue({
-                el: "#app-3",
-                data: {
-                    seen: true
-                }
-            });
-            var app4 = new Vue({
-                el: '#app-4',
-                data: {
-                    todos: [
-                        { text: "今天开始好好学习" },
-                        { text: "我也要好好学习" },
-                        { text: "我也是" }
-                    ]
-                }
-            });
-            var app5 = new Vue({
-                el: '#app-5',
-                data: {
-                    message: "Hello Vue.js!"
-                },
-                methods: {
-                    reverseMessage: function () {
-                        this.message = this.message.split('').reverse().join('')
-                    }
-                }
-            });
-            var app6 = new Vue({
-                el: "#app-6",
-                data: {
-                    message: "hello"
-                }
-            })
-        </script>
-
+</script>

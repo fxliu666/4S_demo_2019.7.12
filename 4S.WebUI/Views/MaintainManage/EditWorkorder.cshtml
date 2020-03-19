@@ -1,0 +1,243 @@
+﻿
+@{
+    ViewBag.Title = "EditWorkorder";
+    Layout = "~/Views/Shared/_LayouthomePage.cshtml";
+}
+
+<div class="layui-fluid">
+
+    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+        <legend>编辑派工单</legend>
+    </fieldset>
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15" id="total">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">派工单信息</div>
+                    <div class="layui-card-body">
+
+                        <form class="layui-form layui-form-pane" action="">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">派工单号</label>
+                                <div class="layui-input-inline">
+                                    <input id="workOrderNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" disabled>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">维保工单号</label>
+                                <div class="layui-input-inline">
+                                    <input id="maintainOrderNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" disabled>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">部门编号</label>
+                                <div class="layui-input-inline">
+                                    <input id="departNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" disabled>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">维保项目</label>
+                                <div class="layui-input-inline">
+                                    <input id="projectName" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" disabled>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">派工时间</label>
+                                <div class="layui-input-inline">
+                                    <input id="assignTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" disabled>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">预计时间</label>
+                                <div class="layui-input-inline">
+                                    <input id="expectedTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" disabled>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+
+                                <div class="layui-inline settime">
+                                    <label class="layui-form-label">完成时间</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input ordertime" placeholder="yyyy-MM-dd HH:mm:ss">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">预计工时</label>
+                                <div class="layui-input-inline">
+                                    <input id="expectedWorkTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" disabled>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">维保工时</label>
+                                <div class="layui-input-inline">
+                                    <input id="finishWorkTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">维保员工</label>
+                                <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea" id="staff"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="layui-form-item">
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:114px">派工单状态</label>
+                                    <div class="layui-input-inline">
+                                        <select name="modules" lay-verify="required" lay-search="" class="pjselect" id="state">
+                                            <option value="1">待领件</option>
+                                            <option value="2">维修中</option>
+                                            <option value="3">已完成</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <input value="0" type="hidden" id="orderId" />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+</div>
+<div style="margin-top: 20px;">
+    <div style="margin-left:50px;margin-top:10px;margin-bottom:10px;">
+        <input type="button" class="layui-btn layui-btn-radius layui-btn-normal" value="确定" onclick="check()" />
+        &nbsp;&nbsp;&nbsp;
+        <input type="button" class="layui-btn layui-btn-radius layui-btn-primary" value="返回" onclick="goback()" />
+    </div>
+</div>
+<script>
+    function render() {
+        layui.use('form', function () {
+            var form = layui.form;
+
+            form.render();
+        });
+    }
+
+
+    layui.use(['form','laydate'], function () {
+        var form = layui.form;
+        var laydate = layui.laydate;
+        form.on('select(pselect1)', function (data) {
+            var item = data.elem;
+            $.post('/DepartManage/ClassSelect', { num: data.value }, function (res) {
+                var htmls = "";
+                for (var x in res) {
+                    htmls += '<option value = "' + res[x].classID + '">' + res[x].className + '</option>';
+                }
+                $(item).parent().parent().find(".pselect2").html(htmls);
+                $(item).parent().parent().find(".pselect3").html("");
+
+                render();
+
+            });
+
+
+        });
+        form.on('select(pselect2)', function (data) {
+            var item = data.elem;
+            $.post('/MaintainManage/PartSelect', { id: data.value }, function (res) {
+                var htmls = "";
+                for (var x in res) {
+                    htmls += '<option value = "' + res[x].partID + '">' + res[x].partName + '</option>';
+                }
+                $(item).parent().parent().find(".pselect3").html(htmls);
+
+                render();
+            })
+        });
+
+        function setTime(){
+            $('.ordertime').each(function(){
+                laydate.render({
+                    elem:this,
+                    trigger:"click",
+                    type:'datetime',
+                    format:'yyyy/M/d H:m:s'
+                });
+            });
+        }
+        setTime();
+    });
+
+</script>
+<script>
+            $("#name").bind('input porpertychange', function () {
+                console.log("e");
+            });
+
+
+
+            loadData();
+
+            function loadData() {
+
+                $.post('/MaintainManage/LoadEditWorkOrder', {id : @ViewBag.id}, function (res) {
+                    $("#orderId").val(res.workOrderID);
+                    $("#workOrderNum").val(res.workOrderNum);
+                    $("#maintainOrderNum").val(res.maintainOrderNum);
+                    $("#departNum").val(res.departNum);
+                    $("#projectName").val(res.maintainProjectName);
+                    $("#expectedTime").val(res.expectedTime);
+                    $("#finishTime").val(res.actualTime);
+                    $("#assignTime").val(res.assignTime);
+                    $("#expectedWorkTime").val(res.exWorkTime);
+                    $("#finishWorkTime").val(res.acWorkTime);
+                    $("#staff").val(res.maintainStaff);
+                    $("#state").val(res.workOrderState);
+                    render();
+                });
+
+            }
+
+            function goback() {
+                window.location.href = "/MaintainManage/WorkorderIndex";
+            }
+
+            function check() {
+                $.post('/MaintainManage/EditWorkOrderResult', { finishTime:$("#finishTime").val(),workTime:$("#finishWorkTime").val(),
+                    staff:$("#staff").val(),state:$("#state").val(), id : $("#orderId").val()
+                }, function (res) {
+                    console.log(res);
+                    if (res == 1) {
+                        setTimeout(function () {
+                            layer.msg("修改成功！");
+                            window.location.href = "/MaintainManage/WorkorderIndex";
+                        }, 500);
+
+                    }
+                    else if (res == 0) {
+                        layer.msg("修改失败，请重试。");
+                    }
+                });
+            }
+            function load(value) {
+                $.post('/DepartManage/PositionSelect', { id: value }, function (res) {
+                    console.log(value);
+                    var result = res.data;
+                    var htmls = "";
+                    for (var x in result) {
+                        htmls += '<option value = "' + result[x].classNum + '">' + result[x].className + '</option>';
+                    }
+                    $("#position").html(htmls);
+                    render();
+
+                });
+            }
+
+</script>
+
+

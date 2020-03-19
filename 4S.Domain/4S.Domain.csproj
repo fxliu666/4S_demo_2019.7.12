@@ -98,15 +98,23 @@
     <Compile Include="Entities\depart.cs" />
     <Compile Include="Entities\maintainOrder.cs" />
     <Compile Include="Entities\maintainOrderModel.cs" />
+    <Compile Include="Entities\maintainOrderTableModel.cs" />
     <Compile Include="Entities\part.cs" />
     <Compile Include="Entities\partclass.cs" />
     <Compile Include="Entities\partJsonModel.cs" />
+    <Compile Include="Entities\partReceive.cs" />
+    <Compile Include="Entities\partSettleModel.cs" />
     <Compile Include="Entities\position.cs" />
     <Compile Include="Entities\project.cs" />
     <Compile Include="Entities\projectJsonModel.cs" />
+    <Compile Include="Entities\settleOrderModel.cs" />
     <Compile Include="Entities\staff.cs" />
     <Compile Include="Entities\staffInfoModel.cs" />
+    <Compile Include="Entities\workOrder.cs" />
+    <Compile Include="Entities\workOrderEditModel.cs" />
     <Compile Include="Entities\workOrderModel.cs" />
+    <Compile Include="Entities\workOrderSettleModel.cs" />
+    <Compile Include="Entities\workOrderTableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,9 +11,12 @@ namespace _4S.Domain.Entities
         public long customerCarID { get; set; }
         public string customerCarNum { get; set; }
         public long customerID { get; set; }
+        public string carBrand { get; set; }
         public string carType { get; set; }
-        public string buyDate { get; set; }
+        public string engineNum { get; set; }
         public string licenseNum { get; set; }
+        public string buyDate { get; set; }
+        
 
     }
 }
