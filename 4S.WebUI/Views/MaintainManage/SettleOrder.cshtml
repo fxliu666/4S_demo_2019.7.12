@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="layui-inline">
-                                    <label class="layui-form-label">维保开始时间</label>
+                                    <label class="layui-form-label" style="width:150px;">维保开始时间</label>
                                     <div class="layui-input-inline">
                                         <input id="startTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                     </div>
@@ -53,29 +53,56 @@
                                     </div>
                                 </div>
                                 <div class="layui-inline">
-                                    <label class="layui-form-label">维保完成时间</label>
+                                    <label class="layui-form-label" style="width:150px;">维保完成时间</label>
                                     <div class="layui-input-inline">
                                         <input id="finishTime" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">车辆品牌</label>
-                                <div class="layui-input-inline">
-                                    <input id="carBrand" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">车辆品牌</label>
+                                    <div class="layui-input-inline">
+                                        <input id="carBrand" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
                                 </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:150px;">工时总价/元</label>
+                                    <div class="layui-input-inline">
+                                        <input id="total1" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">车辆型号</label>
-                                <div class="layui-input-inline">
-                                    <input id="carType" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">车辆型号</label>
+                                    <div class="layui-input-inline">
+                                        <input id="carType" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
                                 </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:150px;">零件总价/元</label>
+                                    <div class="layui-input-inline">
+                                        <input id="total2" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">发动机号</label>
-                                <div class="layui-input-inline">
-                                    <input id="engineNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">发动机号</label>
+                                    <div class="layui-input-inline">
+                                        <input id="engineNum" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
                                 </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">总价/元</label>
+                                    <div class="layui-input-inline">
+                                        <input id="total3" type="text" name="staffname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                
 
                             </div>
          
@@ -95,107 +122,71 @@
 
                 <div class="project" style="display:none;">
 
-                    <div class="layui-col-md9 PJitem">
+                    <div class="layui-col-md7 PJitem">
 
                         <div class="layui-card">
                             <div class="layui-card-header">
-                                <span>添加项目</span>
+                                <span>项目</span>
                                 <button type="button" style="right:25px;" onclick="deleteProject(this)"><i class="layui-icon"></i></button>
-
-
                             </div>
                             <div class="layui-card-body">
-
-                                <div class="layui-form-item">
-
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label" style="width:114px">维修项目</label>
-                                        <div class="layui-input-inline">
-                                            <select name="modules" lay-verify="required" lay-search="" class="pjselect">
-                                                <option value="">直接选择或搜索选择</option>
-                                            </select>
-                                        </div>
-
-
+                                <div class="layui-form-item">           
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label" style="width:114px">维修项目</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" placeholder="请输入数量" class="layui-input pj" />
+                                                </div>
+                                            </div>
                                     </div>
-
-
-
-                                </div>
-                                <div class="layui-form-item">
-
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label" style="width:114px">维修小组</label>
-                                        <div class="layui-input-inline">
-                                            <select name="modules" lay-verify="required" lay-search="" class="dpselect">
-                                                <option value="">直接选择或搜索选择</option>
-                                            </select>
-                                        </div>
-
-
-                                    </div>
-                                    <div class="layui-inline settime">
-
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:114px">维修小组</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" placeholder="请输入数量" class="layui-input dp" />
                                     </div>
 
 
                                 </div>
+                            </div>
+                            <div class="layui-form-item">
 
-
-
-
-
-                                <div class="layui-form-item">
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label" style="width:114px">维修零件</label>
-                                        <div class="layui-input-inline">
-                                            <select class="pselect1" lay-filter="pselect1" name="modules" lay-verify="required" lay-search="">
-                                                <option value="">直接选择或搜索选择</option>
-                                            </select>
-                                        </div>
-                                        <div class="layui-input-inline">
-                                            <select class="pselect2" lay-filter="pselect2" name="modules" lay-verify="required" lay-search="">
-                                                <option value="">直接选择或搜索选择</option>
-                                            </select>
-                                        </div>
-                                        <div class="layui-input-inline">
-                                            <select class="pselect3" lay-filter="pselect3" name="modules" lay-verify="required" lay-search="">
-                                                <option value="">直接选择或搜索选择</option>
-                                            </select>
-                                        </div>
-
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="layui-form-item">
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label" style="width:114px">零件数量</label>
-                                        <div class="layui-input-inline">
-                                            <input type="text" placeholder="请输入数量" class="layui-input pinput" />
-                                        </div>
-                                        <button type="button" class="layui-btn" onclick="addPart(this)">
-                                            <i class="layui-icon">&#xe608;</i> 添加
-                                        </button>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:114px">维修工时</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" placeholder="请输入数量" class="layui-input wt" />
                                     </div>
                                 </div>
-                                <div class="layui-form-item parts">
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label" style="width:114px">维修零件</label>
+                                <label class="layui-form-label" style="width:114px">数量</label>
+                                <label class="layui-form-label" style="width:114px">金额</label>
+                            </div>
+                               
 
-                                    <div class="part" style="display:none;">
-                                        <div class="Pitem" style="margin: 5px 10px 5px 40px;">
-                                            <input class="pid" value="0" type="hidden" />
-                                            <label class="pname" style="padding: 10px 10px;">名称</label>
-                                            <label class="pnum" style="position: absolute;left: 260px;margin-top: 10px;">数量</label>
-                                            <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" style="position: absolute;left: 300px;margin-top: 7px;" onclick="deletePart(this)"><i class="layui-icon"></i></button>
 
-                                        </div>
+                            <div class="layui-form-item parts">
+
+                                <div class="part" style="display:none;">
+                                    <div class="Pitem" style="margin: 5px 10px 5px 40px;">
+                                        <input class="pid" value="0" type="hidden" />
+                                        <label class="pname" style="width:114px">名称</label>
+                                        <label class="pnum" style="width:114px">数量</label>
+                                        <label class="pprice" style="width:114px">数量</label>
+                                        
+
                                     </div>
                                 </div>
-                                <div class="layui-form-item">
-
-                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label" style="width:114px">工时总价</label>
+                                <label class="layui-form-label wtPrice" style="width:114px"></label>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label" style="width:114px">零件总价</label>
+                                <label class="layui-form-label pPrice" style="width:114px"></label>
+                            </div>
+                       
 
                             </div>
                         </div>
@@ -362,7 +353,50 @@
                     $("#finishTime").val(res.finishTime);
                     $("#expectedPrice").val(res.expectedPrice);
                     $("#expectedTime").val(res.expectedTime);
+                    var orders = res.orders;
+                    var htmls;
+                    var totalWorkTimePrice = 0,totalPartPrice = 0;
+                    for(var x in orders){
+
+                        $(".project").find(".pj").attr('value',orders[x].projectName);
+                        $(".project").find(".dp").attr('value',orders[x].departNum);
+                        $(".project").find(".wt").attr('value',orders[x].workTime);
+                        $(".project").find(".wtPrice").text(orders[x].workTime*100);
+                        var parts = orders[x].parts;
+                        var pPrice = 0;
+                        for(var y in parts){
+                            $(".part").find(".pname").text(parts[y].partName);
+                            $(".part").find(".pnum").text(parts[y].partAmount);
+                            $(".part").find(".pprice").text(parts[y].partPrice);
+                            pPrice += parts[y].partPrice;
+                            var html = $(".part").html();
+      
+                            $(".project:hidden").find(".parts").append(html);
+                        }
+                        
+                        $(".project").find(".pPrice").text(pPrice);
+                        var content = $(".project").html();
+                        var part = $(".part:hidden").prop("outerHTML");
+                        console.log(content);
+                        $(".projects").append(content);
+                        $(".project:hidden").find(".parts").empty();
+                        $(".project:hidden").find(".parts").append(part);
+                        totalWorkTimePrice += orders[x].workTime*100;
+                        totalPartPrice += pPrice;
+                        
+              
+                        
+                       
+                    }
+                    $("#total1").attr("value",totalWorkTimePrice);
+                    $("#total2").attr("value",totalPartPrice);
+                    $("#total3").attr("value",totalPartPrice+totalWorkTimePrice);
+
+               
+                    
                     render();
+                    
+                    
                 });
 
             }
